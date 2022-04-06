@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Stadium.unity
-    guid: 3773f4eb3af3b8249ba0116d6ab27512
+    path: Assets/Scenes/Day_Night_Test.unity
+    guid: 2caeefa3406194b4ebfbe3578198a0f3
   m_configObjects: {}
