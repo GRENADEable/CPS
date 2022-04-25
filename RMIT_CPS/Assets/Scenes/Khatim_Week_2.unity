@@ -914,6 +914,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FPS_Player_Basic
       objectReference: {fileID: 0}
+    - target: {fileID: 1816308588518909062, guid: 1c91665b49bd9784a994ac20d466021f, type: 3}
+      propertyPath: canJump
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c91665b49bd9784a994ac20d466021f, type: 3}
 --- !u!1 &1412440225

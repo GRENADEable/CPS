@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Khatim_Week_5.unity
-    guid: c27f5080a707a594f89bc55c5305dedd
+    path: Assets/Scenes/Khatim_Week_7.unity
+    guid: 4a2b7c0e8fa13044286ce703e05d2f35
   m_configObjects: {}

@@ -72,7 +72,7 @@ Camera:
   m_GameObject: {fileID: 7733886534633466691}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -197,14 +197,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runKey: 304
+  jumpKey: 32
   playerWalkSpeed: 3
-  playerRunSpeed: 6
+  playerRunSpeed: 5
   gravity: -19.62
   groundCheck: {fileID: 7733886534136692036}
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 128
+  canJump: 1
+  jumpPower: 2.5
 --- !u!114 &5892698905700742563
 MonoBehaviour:
   m_ObjectHideFlags: 0

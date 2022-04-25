@@ -10,5 +10,10 @@ public class GameManager : MonoBehaviour
 
     #region Unity Callbacks
     void Start() => fadeBG.Play("Fade_In");
+
+    void Update()
+    {
+
+    }
     #endregion
 }

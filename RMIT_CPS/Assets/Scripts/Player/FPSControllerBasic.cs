@@ -3,11 +3,19 @@
 public class FPSControllerBasic : MonoBehaviour
 {
     #region Serialized Variables
+
+    #region Inputs
     [Space, Header("Player Keys")]
     [SerializeField]
     [Tooltip("Which key to press when running")]
     private KeyCode runKey = KeyCode.LeftShift;
 
+    [SerializeField]
+    [Tooltip("Which key to press when jumping")]
+    private KeyCode jumpKey = KeyCode.Space;
+    #endregion
+
+    #region Player Variables
     [Space, Header("Player Variables")]
     [SerializeField]
     [Tooltip("Walk speed of the player")]
@@ -20,7 +28,9 @@ public class FPSControllerBasic : MonoBehaviour
     [SerializeField]
     [Tooltip("Gravity of the player when falling")]
     private float gravity = -9.81f;
+    #endregion
 
+    #region Ground Check
     [Space, Header("Ground Check")]
     [SerializeField]
     [Tooltip("Transform Component for checking the ground")]
@@ -35,12 +45,26 @@ public class FPSControllerBasic : MonoBehaviour
     private LayerMask groundMask = default;
     #endregion
 
+    #region Player Jump
+    [Space, Header("Jump Variables")]
+    [SerializeField]
+    [Tooltip("Can the player Jump?")]
+    private bool canJump = true;
+
+    [SerializeField]
+    [Tooltip("Power of how high the player can jump")]
+    private float jumpPower = 2.5f;
+    #endregion
+
+    #endregion
+
     #region Private Variables
     [Header("Player Variables")]
     private CharacterController _charControl = default;
     private Vector3 _vel = default;
     private float _currSpeed = default;
     private bool _isGrounded = default;
+    private bool _isJumping = default;
     #endregion
 
     #region Unity Callbacks
@@ -55,6 +79,15 @@ public class FPSControllerBasic : MonoBehaviour
         GroundCheck();
         PlayerCurrStance();
         PlayerMovement();
+
+        if (Input.GetKeyDown(jumpKey) && canJump)
+            PlayerJump();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Death"))
+            Application.LoadLevel(Application.loadedLevel);
     }
     #endregion
 
@@ -67,7 +100,10 @@ public class FPSControllerBasic : MonoBehaviour
         _isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (_isGrounded && _vel.y < 0)
+        {
+            _isJumping = false;
             _vel.y = -2f;
+        }
 
         _vel.y += gravity * Time.deltaTime;
         _charControl.Move(_vel * Time.deltaTime);
@@ -100,6 +136,19 @@ public class FPSControllerBasic : MonoBehaviour
         {
             _currSpeed = playerWalkSpeed;
             //Debug.Log("Walking");
+        }
+    }
+
+    /// <summary>
+    /// Jump's player;
+    /// </summary>
+    void PlayerJump()
+    {
+        if (_isGrounded && !_isJumping)
+        {
+            float jumpForce = Mathf.Sqrt(jumpPower * Mathf.Abs(gravity) * 2);
+            _vel.y += jumpForce;
+            _isJumping = true;
         }
     }
     #endregion

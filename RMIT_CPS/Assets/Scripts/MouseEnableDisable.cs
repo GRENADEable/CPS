@@ -14,13 +14,13 @@ public class MouseEnableDisable : MonoBehaviour
         if (isMouseEnabled)
         {
             Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.None;
         }
 
         else
         {
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
     #endregion
