@@ -12,6 +12,10 @@ public class GameManagerMenu : MonoBehaviour
     [SerializeField]
     [Tooltip("Buttons Components")]
     private Button[] menuButtons = default;
+
+    [SerializeField]
+    [Tooltip("Which scene to switch to?")]
+    private int sceneNo = default;
     #endregion
 
     #region Unity Callbacks

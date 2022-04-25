@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,10 +11,18 @@ public class GameManager : MonoBehaviour
 
     #region Unity Callbacks
     void Start() => fadeBG.Play("Fade_In");
+    #endregion
 
-    void Update()
+    #region My Functions
+    public void OnGameEnd() => StartCoroutine(EndDelay());
+    #endregion
+
+    #region Coroutines
+    IEnumerator EndDelay()
     {
-
+        fadeBG.Play("Fade_Out");
+        yield return new WaitForSeconds(0.5f);
+        Application.LoadLevel(0);
     }
     #endregion
 }
