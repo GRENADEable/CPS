@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.22380304, g: 0.24376729, b: 0.26534945, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -871,6 +871,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1370029768}
   - component: {fileID: 1370029769}
+  - component: {fileID: 1370029770}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -909,6 +910,19 @@ MonoBehaviour:
   - {fileID: 1363548250}
   - {fileID: 1697266260}
   sceneNo: 1
+--- !u!114 &1370029770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370029767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb24e1aaf8a5ca4f9d9f944c2bba721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMouseEnabled: 1
 --- !u!1 &1402846862
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,14 @@ public class GameManagerMenu : MonoBehaviour
     #endregion
 
     #region Unity Callbacks
-    void Start() => fadeBG.Play("Fade_In");
+    void Start()
+    {
+        fadeBG.Play("Fade_In");
+
+#if UNITY_WEBGL
+        menuButtons[1].interactable = false;
+#endif
+    }
     #endregion
 
     #region My Functions
