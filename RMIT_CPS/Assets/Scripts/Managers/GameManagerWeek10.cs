@@ -8,6 +8,13 @@ public class GameManagerWeek10 : MonoBehaviour
 {
     #region Serialized Variables
 
+    #region Datas
+    [Space, Header("Datas")]
+    [SerializeField]
+    [Tooltip("DarkenData Scriptable Object")]
+    private DarkenData darkData = default;
+    #endregion
+
     #region Enums
     [Space, Header("Enums")]
     [SerializeField] private GameState _currGameState = GameState.Intro;
@@ -24,13 +31,40 @@ public class GameManagerWeek10 : MonoBehaviour
     [Tooltip("Pause Panel")]
     private GameObject pausePanel;
 
+    //[SerializeField]
+    //[Tooltip("HUD Panel")]
+    //private GameObject hudPanel;
+
     [SerializeField]
-    [Tooltip("HUD Panel")]
-    private GameObject hudPanel;
+    [Tooltip("Win Panel")]
+    private GameObject winPanel;
 
     [SerializeField]
     [Tooltip("Fade Image Animation Component")]
     private Animator fadeBG = default;
+
+    [SerializeField]
+    [Tooltip("Darken Image Component")]
+    private Image darkenImg = default;
+    #endregion
+
+    #region Audio
+    [Space, Header("Audio")]
+    [SerializeField]
+    [Tooltip("SFX Audio Source")]
+    private AudioSource sfxAud = default;
+
+    [SerializeField]
+    [Tooltip("BG Audio Source")]
+    private AudioSource bgAud = default;
+
+    [SerializeField]
+    [Tooltip("Arrays of SFXs")]
+    private AudioClip[] sfxClips = default;
+
+    [SerializeField]
+    [Tooltip("BG Music Loop Delay")]
+    private float bgAudLoopDelay = default;
     #endregion
 
     #endregion
@@ -43,20 +77,30 @@ public class GameManagerWeek10 : MonoBehaviour
     #region Events
     void OnEnable()
     {
+        FPSControllerBasicWeek10.OnScreenDarken += OnScreenDarkenEventReceived;
+        FPSControllerBasicWeek10.OnPlayerDead += OnPlayerDeadEventReceived;
     }
 
     void OnDisable()
     {
+        FPSControllerBasicWeek10.OnScreenDarken -= OnScreenDarkenEventReceived;
+        FPSControllerBasicWeek10.OnPlayerDead -= OnPlayerDeadEventReceived;
     }
 
     void OnDestroy()
     {
+        FPSControllerBasicWeek10.OnScreenDarken -= OnScreenDarkenEventReceived;
+        FPSControllerBasicWeek10.OnPlayerDead -= OnPlayerDeadEventReceived;
     }
     #endregion
 
+    void OnApplicationQuit() => darkData.darkenLevel = 0;
+
     void Start()
     {
+        ChangeDarkenUI();
         StartCoroutine(StartDelay());
+        StartCoroutine(BGAudLoop());
         DisableCursor();
 #if UNITY_WEBGL
         // Disables the Quit button on WebGL;
@@ -69,17 +113,15 @@ public class GameManagerWeek10 : MonoBehaviour
         if (_currGameState == GameState.Game)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
+            {
                 TogglePause(true);
+                sfxAud.PlayOneShot(sfxClips[1]);
+            }
         }
     }
     #endregion
 
     #region My Functions
-    public void OnGameEnd()
-    {
-        StartCoroutine(MenuDelay());
-        _currGameState = GameState.Outro;
-    }
     void DisableCursor()
     {
         Cursor.visible = false;
@@ -95,6 +137,15 @@ public class GameManagerWeek10 : MonoBehaviour
     void ChangeScene(int index) => Application.LoadLevel(index);
 
     #region UI
+    public void OnGameWon() => StartCoroutine(EndGameDelay());
+
+    void ChangeDarkenUI()
+    {
+        Color darkColour = darkenImg.color;
+        darkColour.a = darkData.darkenLevel;
+        darkenImg.color = darkColour;
+    }
+
     void TogglePause(bool isPaused)
     {
         if (isPaused)
@@ -102,7 +153,7 @@ public class GameManagerWeek10 : MonoBehaviour
             _currGameState = GameState.Paused;
             EnableCursor();
             Time.timeScale = 0;
-            hudPanel.SetActive(false);
+            //hudPanel.SetActive(false);
             pausePanel.SetActive(true);
         }
         else
@@ -110,7 +161,7 @@ public class GameManagerWeek10 : MonoBehaviour
             _currGameState = GameState.Game;
             DisableCursor();
             Time.timeScale = 1;
-            hudPanel.SetActive(true);
+            //hudPanel.SetActive(true);
             pausePanel.SetActive(false);
         }
 
@@ -121,25 +172,41 @@ public class GameManagerWeek10 : MonoBehaviour
     /// Function tied with Resume_Button Button;
     /// Resumes the Game;
     /// </summary>
-    public void OnClick_Resume() => TogglePause(false);
+    public void OnClick_Resume()
+    {
+        TogglePause(false);
+        sfxAud.PlayOneShot(sfxClips[1]);
+    }
 
     /// <summary>
     /// Function tied with Restart_Button Button;
     /// Restarts the game with a delay;
     /// </summary>
-    public void OnClick_Restart() => StartCoroutine(RestartGameDelay());
+    public void OnClick_Restart()
+    {
+        sfxAud.PlayOneShot(sfxClips[1]);
+        StartCoroutine(RestartGameDelay());
+    }
 
     /// <summary>
     /// Button tied with Menu_Button;
     /// Goes to the Menu with a delay;
     /// </summary>
-    public void OnClick_Menu() => StartCoroutine(MenuDelay());
+    public void OnClick_Menu()
+    {
+        sfxAud.PlayOneShot(sfxClips[1]);
+        StartCoroutine(MenuDelay());
+    }
 
     /// <summary>
     /// Function tied with Quit_Button Buttons;
     /// Quits the game with a delay;
     /// </summary>
-    public void OnClick_Quit() => StartCoroutine(QuitGameDelay());
+    public void OnClick_Quit()
+    {
+        sfxAud.PlayOneShot(sfxClips[1]);
+        StartCoroutine(QuitGameDelay());
+    }
 
     /// <summary>
     /// Function tied with Restart_Button, Menu_Button and Quit_Button Buttons;
@@ -166,6 +233,7 @@ public class GameManagerWeek10 : MonoBehaviour
     IEnumerator StartDelay()
     {
         fadeBG.Play("Fade_In");
+        sfxAud.PlayOneShot(sfxClips[0], 0.1f);
         _currGameState = GameState.Intro;
         yield return new WaitForSeconds(0.5f);
         _currGameState = GameState.Game;
@@ -209,6 +277,29 @@ public class GameManagerWeek10 : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Application.Quit();
     }
+
+    /// <summary>
+    /// Ends with a Delay;
+    /// </summary>
+    /// <returns> Float Delay; </returns>
+    IEnumerator EndGameDelay()
+    {
+        winPanel.SetActive(true);
+        _currGameState = GameState.Outro;
+        darkData.darkenLevel = 0;
+        yield return new WaitForSeconds(3.5f);
+        fadeBG.Play("Fade_Out");
+        ChangeScene(0);
+    }
+    #endregion
+
+    #region Audio
+    IEnumerator BGAudLoop()
+    {
+        yield return new WaitForSeconds(bgAudLoopDelay);
+        bgAud.Play();
+        StartCoroutine(BGAudLoop());
+    }
     #endregion
 
     #endregion
@@ -216,9 +307,24 @@ public class GameManagerWeek10 : MonoBehaviour
     #region Events
 
     /// <summary>
-    /// Subbed to event from FPSControllerBasic Script
+    /// Subbed to event from FPSControllerBasicWeek10 Script
     /// Restarts the Game with delay;
     /// </summary>
-    void OnPlayerDeadEventReceived() => StartCoroutine(RestartGameDelay());
+    void OnPlayerDeadEventReceived()
+    {
+        if (darkData.darkenLevel >= 1)
+        {
+            darkData.darkenLevel = 0;
+            StartCoroutine(MenuDelay());
+        }
+        else
+            StartCoroutine(RestartGameDelay());
+    }
+
+    /// <summary>
+    /// Subbed to event from FPSControllerBasicWeek10 Script
+    /// Makes the screen go dark;
+    /// </summary>
+    void OnScreenDarkenEventReceived() => darkData.darkenLevel += 0.3f;
     #endregion
 }
