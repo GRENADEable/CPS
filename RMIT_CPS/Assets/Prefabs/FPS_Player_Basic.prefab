@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runKey: 304
+  jumpKey: 32
   playerWalkSpeed: 3
   playerRunSpeed: 6
   gravity: -19.62
@@ -178,7 +179,9 @@ MonoBehaviour:
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 8192
+  canJump: 1
+  jumpPower: 2.5
 --- !u!114 &4312309740924389980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +298,9 @@ MonoBehaviour:
   maxXClamp: 90
   mouseSens: 300
   playerRoot: {fileID: 93234601408959341}
+  footstepAud: {fileID: 0}
+  footStepsSfx: {fileID: 0}
+  footstepVolume: 0
 --- !u!1 &93234601793904357
 GameObject:
   m_ObjectHideFlags: 0

@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 123874005}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 274893115}
   - component: {fileID: 274893114}
   - component: {fileID: 274893113}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 434126356}
   - component: {fileID: 434126355}
   - component: {fileID: 434126354}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,7 +516,7 @@ GameObject:
   - component: {fileID: 456729704}
   - component: {fileID: 456729703}
   - component: {fileID: 456729702}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -686,7 +686,7 @@ GameObject:
   - component: {fileID: 547891328}
   - component: {fileID: 547891327}
   - component: {fileID: 547891326}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -847,7 +847,7 @@ GameObject:
   - component: {fileID: 594523537}
   - component: {fileID: 594523536}
   - component: {fileID: 594523535}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1023,7 +1023,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 784748756}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1058,7 +1058,7 @@ GameObject:
   - component: {fileID: 794853839}
   - component: {fileID: 794853838}
   - component: {fileID: 794853837}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1153,7 +1153,7 @@ GameObject:
   - component: {fileID: 813374405}
   - component: {fileID: 813374404}
   - component: {fileID: 813374403}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1248,7 +1248,7 @@ GameObject:
   - component: {fileID: 823501486}
   - component: {fileID: 823501485}
   - component: {fileID: 823501484}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2022,7 +2022,7 @@ GameObject:
   - component: {fileID: 1070392459}
   - component: {fileID: 1070392458}
   - component: {fileID: 1070392457}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2117,7 +2117,7 @@ GameObject:
   - component: {fileID: 1075701187}
   - component: {fileID: 1075701186}
   - component: {fileID: 1075701185}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2212,7 +2212,7 @@ GameObject:
   - component: {fileID: 1151010215}
   - component: {fileID: 1151010214}
   - component: {fileID: 1151010213}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2307,7 +2307,7 @@ GameObject:
   - component: {fileID: 1282785882}
   - component: {fileID: 1282785881}
   - component: {fileID: 1282785880}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2497,7 +2497,7 @@ GameObject:
   - component: {fileID: 1502517843}
   - component: {fileID: 1502517842}
   - component: {fileID: 1502517841}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2941,7 +2941,7 @@ GameObject:
   - component: {fileID: 1824260575}
   - component: {fileID: 1824260574}
   - component: {fileID: 1824260573}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3188,7 +3188,7 @@ GameObject:
   - component: {fileID: 1869997049}
   - component: {fileID: 1869997048}
   - component: {fileID: 1869997047}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3376,7 +3376,7 @@ GameObject:
   - component: {fileID: 1933020447}
   - component: {fileID: 1933020446}
   - component: {fileID: 1933020445}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3471,7 +3471,7 @@ GameObject:
   - component: {fileID: 2034319493}
   - component: {fileID: 2034319492}
   - component: {fileID: 2034319491}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Ground_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
