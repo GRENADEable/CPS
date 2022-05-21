@@ -114,7 +114,7 @@ namespace RedMountMedia
         }
         #endregion
 
-        void Start()
+        void Awake()
         {
             DisableCursor();
             Intialise();
@@ -136,7 +136,7 @@ namespace RedMountMedia
                 return;
             }
 
-            Instantiate(fpsPlayer, GetStartPos(), GetStartRot(), transform);
+            GameObject player = Instantiate(fpsPlayer, GetStartPos(), GetStartRot(), transform);
             GameObject camObj = Instantiate(fpsExamineCam, transform.position, Quaternion.identity, transform);
             Instantiate(fpsInteraction, transform.position, Quaternion.identity, transform);
             Instantiate(fpsCanvas, transform.position, Quaternion.identity, transform);

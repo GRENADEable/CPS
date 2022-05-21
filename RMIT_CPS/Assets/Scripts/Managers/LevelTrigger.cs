@@ -50,7 +50,7 @@ public class LevelTrigger : MonoBehaviour
     [Tooltip("Call event after x amount of seconds")]
     private float triggerDelay = 0f;
 
-    [Header("Event Trigger Enter / Stay / Exit")]
+    [Header("Event Trigger Enter / Exit")]
     public UnityEvent EventTriggerEnter;
     public UnityEvent EventTriggerExit;
     #endregion
