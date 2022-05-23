@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 
 namespace RedMountMedia
 {
@@ -16,6 +17,10 @@ namespace RedMountMedia
 
         #region Player Zoom
         [Space, Header("Player Zoom")]
+        [SerializeField]
+        [Tooltip("Cinemachine VCam")]
+        private CinemachineVirtualCamera playerVCam = default;
+
         [SerializeField]
         [Tooltip("Which key to press when zooming")]
         private KeyCode zoomKey = KeyCode.Mouse1;
@@ -46,17 +51,12 @@ namespace RedMountMedia
         #region Player Zoom
         [Header("Player Zoom")]
         private float _currZoomFov;
-        private Camera _cam;
         #endregion
 
         #endregion
 
         #region Unity Callbacks
-        void Start()
-        {
-            _cam = Camera.main;
-            _currZoomFov = _cam.fieldOfView;
-        }
+        void Start() => _currZoomFov = playerVCam.m_Lens.FieldOfView;
 
         void Update()
         {
@@ -76,9 +76,9 @@ namespace RedMountMedia
         void PlayerZooming()
         {
             if (Input.GetKey(zoomKey))
-                _cam.fieldOfView = Mathf.Lerp(_cam.fieldOfView, zoomFovVal, lerpTime * Time.deltaTime);
+                playerVCam.m_Lens.FieldOfView = Mathf.Lerp(playerVCam.m_Lens.FieldOfView, zoomFovVal, lerpTime * Time.deltaTime);
             else
-                _cam.fieldOfView = Mathf.Lerp(_cam.fieldOfView, _currZoomFov, lerpTime * Time.deltaTime);
+                playerVCam.m_Lens.FieldOfView = Mathf.Lerp(playerVCam.m_Lens.FieldOfView, _currZoomFov, lerpTime * Time.deltaTime);
 
             // Placed a single frame key down for the event to be sent to the FPSDefaultUI Script;
             if (Input.GetKeyDown(zoomKey))

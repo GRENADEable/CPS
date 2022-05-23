@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RedMountMedia;
-using Cinemachine;
 
 public class GameManagerArchivalObject : MonoBehaviour
 {
@@ -13,6 +12,10 @@ public class GameManagerArchivalObject : MonoBehaviour
     [SerializeField]
     [Tooltip("GameManager Scriptable Object")]
     private GameMangerData gmData = default;
+
+    [SerializeField]
+    [Tooltip("Do you want to disable the curosr?")]
+    private bool isCursorDisabled = default;
     #endregion
 
     #region Cinemachine Cams
@@ -32,14 +35,41 @@ public class GameManagerArchivalObject : MonoBehaviour
     [SerializeField]
     [Tooltip("Fade Panel")]
     private Animator fadeBG = default;
+
+    [SerializeField]
+    [Tooltip("Player HUD Panel")]
+    private GameObject hudPanel = default;
+    #endregion
+
+    #region GameObjects
+    [Space, Header("GameObjects")]
+    [SerializeField]
+    [Tooltip("Crane Object")]
+    private GameObject craneObj = default;
+    #endregion
+
+    #region Floats
+    [Space, Header("Floats")]
+    [SerializeField]
+    [Tooltip("Crane Rotation Speed")]
+    private float craneRotationSpeed = default;
+    #endregion
+
+    #region Events Float
+    public delegate void SendEventsFloat(float floatIndex);
+    /// <summary>
+    /// Event sent from GameManagerArchivalObject to FPSController Scripts;
+    /// Changes the Player's speed;
+    /// </summary>
+    public static event SendEventsFloat OnSpeedToggle;
     #endregion
 
     #endregion
 
     #region Private Variables
     private Camera _cam = default;
-    //[SerializeField] private CinemachineVirtualCamera _vCamMain = default;
-    private GameObject _player = default;
+    private bool _isCraneRotating = default;
+    private
     #endregion
 
     #region Unity Callbacks
@@ -65,12 +95,14 @@ public class GameManagerArchivalObject : MonoBehaviour
     {
         _cam = Camera.main;
         StartCoroutine(StartDelay());
-        //Intialise();
+
+        if (isCursorDisabled)
+            gmData.DisableCursor();
     }
 
     void Update()
     {
-
+        RotatingCrane();
     }
     #endregion
 
@@ -83,14 +115,38 @@ public class GameManagerArchivalObject : MonoBehaviour
     public void OnSwitchCameraLayer(bool isSwitchLayer)
     {
         if (isSwitchLayer)
+        {
+            hudPanel.SetActive(false);
             _cam.cullingMask = switchLayer;
+        }
         else
+        {
+            hudPanel.SetActive(true);
             _cam.cullingMask = defaultLayer;
+        }
     }
 
-    void Intialise()
+    /// <summary>
+    /// Makes the crane rotate with the bool from the Unity Event;
+    /// </summary>
+    /// <param name="isRotatingCrane"> If true, rotates the crane, else it stops rotation; </param>
+    public void OnCraneRotate(bool isRotatingCrane)
     {
+        if (isRotatingCrane)
+            _isCraneRotating = true;
+        else
+            _isCraneRotating = false;
+    }
 
+    public void OnIsPlayerSpeedy(float speed) => OnSpeedToggle?.Invoke(speed);
+
+    /// <summary>
+    /// Crane rotation;
+    /// </summary>
+    void RotatingCrane()
+    {
+        if (_isCraneRotating)
+            craneObj.transform.Rotate(Vector3.up * craneRotationSpeed * Time.deltaTime);
     }
     #endregion
 

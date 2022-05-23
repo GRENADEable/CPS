@@ -89,7 +89,7 @@ CharacterController:
   m_Height: 1.8
   m_Radius: 0.2
   m_SlopeLimit: 45
-  m_StepOffset: 0.1
+  m_StepOffset: 0.2
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.005
   m_Center: {x: 0, y: 0.9, z: 0}
@@ -111,8 +111,8 @@ MonoBehaviour:
   jumpKey: 32
   crouchKey: 99
   crouchAlternateKey: 306
-  playerWalkSpeed: 3
-  playerRunSpeed: 15
+  playerWalkSpeed: 6
+  playerRunSpeed: 12
   gravity: -19.62
   canPush: 1
   pushPower: 0.8
@@ -200,6 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gmData: {fileID: 11400000, guid: 73d00e7781226674f8e47e1e45afeab4, type: 2}
   isUsingScriptableObject: 1
+  playerVCam: {fileID: 0}
   zoomKey: 324
   zoomFovVal: 25
   lerpTime: 10

@@ -141,6 +141,24 @@ namespace RedMountMedia
         #endregion
 
         #region Unity Callbacks
+
+        #region Events
+        void OnEnable()
+        {
+            GameManagerArchivalObject.OnSpeedToggle += OnRunSpeedToggleEventReceived;
+        }
+
+        void OnDisable()
+        {
+            GameManagerArchivalObject.OnSpeedToggle -= OnRunSpeedToggleEventReceived;
+        }
+
+        void OnDestroy()
+        {
+            GameManagerArchivalObject.OnSpeedToggle -= OnRunSpeedToggleEventReceived;
+        }
+        #endregion
+
         void Start()
         {
             _charControl = GetComponent<CharacterController>();
@@ -322,6 +340,15 @@ namespace RedMountMedia
         }
         #endregion
 
+        #endregion
+
+        #region Events
+        /// <summary>
+        /// Subbed to event from GameManagerArchivalObject Script;
+        /// Changes the speed of the Player;
+        /// </summary>
+        /// <param name="speed"> Player Speed; </param>
+        void OnRunSpeedToggleEventReceived(float speed) => playerRunSpeed = speed;
         #endregion
     }
 }
