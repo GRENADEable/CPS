@@ -33,12 +33,19 @@ public class GameManagerArchivalObject : MonoBehaviour
     #region UI
     [Space, Header("UI")]
     [SerializeField]
+    [Tooltip("Pause Buttons")]
+    private Button[] pauseButtons = default;
+    #endregion
+
+    #region Animators
+    [Space, Header("Animators")]
+    [SerializeField]
     [Tooltip("Fade Panel")]
     private Animator fadeBG = default;
 
     [SerializeField]
-    [Tooltip("Pause Buttons")]
-    private Button[] pauseButtons = default;
+    [Tooltip("Stickman Flicker Anim")]
+    private Animator stickmanFlickerAnim = default;
     #endregion
 
     #region GameObjects
@@ -258,7 +265,7 @@ public class GameManagerArchivalObject : MonoBehaviour
     void RotatingCrane()
     {
         if (_isCraneRotating)
-            craneObj.transform.Rotate(Vector3.up * craneRotationSpeed * Time.deltaTime);
+            craneObj.transform.Rotate(craneRotationSpeed * Time.deltaTime * Vector3.up);
     }
     #endregion
 
@@ -333,6 +340,7 @@ public class GameManagerArchivalObject : MonoBehaviour
 
     IEnumerator Room2Sequence()
     {
+        stickmanFlickerAnim.Play("Stickman_Flicker_Anim");
         _charControl.enabled = false;
         playerRoot.transform.position = room2TeleportPos.position;
         _charControl.enabled = true;
@@ -340,6 +348,7 @@ public class GameManagerArchivalObject : MonoBehaviour
         _isRoom2GettingSmall = true;
         yield return new WaitForSeconds(room2ShrinkDelay);
         _isRoom2GettingSmall = false;
+        stickmanFlickerAnim.Play("Empty");
         yield return new WaitForSeconds(room2DoorDelay);
         room2DoorObj.SetActive(false);
     }

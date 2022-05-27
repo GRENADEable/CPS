@@ -1489,7 +1489,7 @@ Transform:
   m_LocalScale: {x: 49.304, y: 0.5, z: 65.716}
   m_Children: []
   m_Father: {fileID: 1556410215}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &749336545
 BoxCollider:
@@ -1553,6 +1553,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749336543}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &791371355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 791371356}
+  - component: {fileID: 791371357}
+  m_Layer: 16
+  m_Name: Stickman_Flicker_Anim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &791371356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791371355}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.031999588, z: 0.106999874}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1150726233}
+  m_Father: {fileID: 1450730692}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &791371357
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791371355}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 76b01fb4d4a9d5c40b2aeac58dd493b1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &902346481
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,6 +1811,52 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+--- !u!1 &1150726232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1150726233}
+  - component: {fileID: 1150726234}
+  m_Layer: 16
+  m_Name: Stickman_Root
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1150726233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150726232}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1802442781}
+  m_Father: {fileID: 791371356}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1150726234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150726232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d38caf095c622a4449148360c2ec4b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currRotType: 3
+  rotationSpeed: 400
 --- !u!1001 &1154981925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1826,7 +1923,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d243fc2e74bb80940be2a6e2b2b59b0c, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d243fc2e74bb80940be2a6e2b2b59b0c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2663,7 +2760,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 791371356}
   m_Father: {fileID: 1773504555}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2698,7 +2796,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 450613
+    m_Bits: 483381
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 7902ecd74acca244fa11720576e89353, type: 2}
   m_TargetDisplay: 0
@@ -2710,6 +2808,91 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1001 &1482620422
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1150726233}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.111780696
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.111780696
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.111780696
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.09829998
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6473547792682163411, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_Name
+      value: Stickman_Scary
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771551627431062346, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3493785574385416303, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
 --- !u!1001 &1503701002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2719,7 +2902,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f4391717a3cdcc242b9562efdeca9a20, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4391717a3cdcc242b9562efdeca9a20, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2930,8 +3113,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1183389878}
   - {fileID: 749336544}
+  - {fileID: 1183389878}
   - {fileID: 1612430070}
   - {fileID: 1503701003}
   m_Father: {fileID: 902346482}
@@ -3282,12 +3465,13 @@ MonoBehaviour:
   defaultLayer:
     serializedVersion: 2
     m_Bits: 516149
-  fadeBG: {fileID: 1638211079484639957}
   pauseButtons:
   - {fileID: 1927934322}
   - {fileID: 610356677}
   - {fileID: 1832049723}
   - {fileID: 46575181}
+  fadeBG: {fileID: 1638211079484639957}
+  stickmanFlickerAnim: {fileID: 791371357}
   playerRoot: {fileID: 1526897014}
   hudPanel: {fileID: 9161223950416742988}
   pausePanel: {fileID: 1530853990}
@@ -3419,6 +3603,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1802442781 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 819dbbc006131c848b11eab4c3d7da25, type: 3}
+  m_PrefabInstance: {fileID: 1482620422}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1828342081 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2242253777996796320, guid: 442a769198d49bd42801394d15fca5f4, type: 3}
