@@ -76,12 +76,13 @@ public class LevelTrigger : MonoBehaviour
                 _timeStayed = 0f;
                 _stayActive = true;
 
-                Debug.Log("Trigger Entered");
-
                 if (triggerDelay > 0)
                     StartCoroutine(EnterDelayed());
                 else
+                {
                     EventTriggerEnter.Invoke();
+                    Debug.Log("Trigger Entered");
+                }
             }
 
             _triggerCountedEnter++;
@@ -98,12 +99,14 @@ public class LevelTrigger : MonoBehaviour
             {
                 _timeStayed = 0f;
 
-                Debug.Log("Trigger Exit");
 
                 if (triggerDelay > 0)
                     StartCoroutine(ExitDelayed());
                 else
+                {
                     EventTriggerExit.Invoke();
+                    Debug.Log("Trigger Exit");
+                }
             }
 
             _triggerCountedExit++;
@@ -161,12 +164,14 @@ public class LevelTrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(triggerDelay);
         EventTriggerEnter.Invoke();
+        Debug.Log("Trigger Enter Delay");
     }
 
     IEnumerator ExitDelayed()
     {
         yield return new WaitForSeconds(triggerDelay);
         EventTriggerExit.Invoke();
+        Debug.Log("Trigger Exit Delay");
     }
     #endregion
 

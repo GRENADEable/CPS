@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 8231377412732296299}
   - component: {fileID: 1763410158725020158}
   - component: {fileID: -3405502998002964541}
-  - component: {fileID: 2217819814711589067}
   m_Layer: 0
   m_Name: FPS_Player
   m_TagString: Player
@@ -163,23 +162,6 @@ MonoBehaviour:
   flashLightPrefabObj: {fileID: 4334287265348815412, guid: 64a5bcfcea1ded44fbbb73d4eabe038a, type: 3}
   flashLightSceneObj: {fileID: 0}
   speed: 3
---- !u!114 &2217819814711589067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 93234601408959342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9315f5cdf06550e4481c210012c95948, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gmData: {fileID: 11400000, guid: 73d00e7781226674f8e47e1e45afeab4, type: 2}
-  isUsingScriptableObject: 1
-  zoomKey: 324
-  zoomFovVal: 25
-  lerpTime: 10
 --- !u!1 &93234601410974908
 GameObject:
   m_ObjectHideFlags: 0

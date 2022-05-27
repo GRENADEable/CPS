@@ -6,7 +6,7 @@ public class GameMangerData : ScriptableObject
     #region Public Variables
     [Space, Header("Enums")]
     public GameState currState = GameState.Game;
-    public enum GameState { Intro, Game, Exit, Inventory, Examine };
+    public enum GameState { Intro, IntroCutscene, Game, Exit, Inventory, Examine };
     #endregion
 
     #region My Functions
@@ -50,6 +50,12 @@ public class GameMangerData : ScriptableObject
     #endregion
 
     /// <summary>
+    /// Changes level with Scene Int;
+    /// </summary>
+    /// <param name="scene"> Scene Integer; </param>
+    public void ChangeLevel(int scene) => Application.LoadLevel(scene);
+
+    /// <summary>
     /// Pauses game using Time.timeScale;
     /// </summary>
     /// <param name="isPaused"> If true, pause game, if false, un-pause game; </param>
@@ -70,6 +76,9 @@ public class GameMangerData : ScriptableObject
     {
         if (state.Contains("Intro"))
             currState = GameState.Intro;
+
+        if (state.Contains("IntroCutscene"))
+            currState = GameState.IntroCutscene;
 
         if (state.Contains("Game"))
             currState = GameState.Game;
