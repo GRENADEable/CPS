@@ -746,7 +746,7 @@ GameObject:
   - component: {fileID: 7777662019374870826}
   - component: {fileID: 2860951266223823020}
   m_Layer: 0
-  m_Name: Crane_Spinning
+  m_Name: Crane_Spinning_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
