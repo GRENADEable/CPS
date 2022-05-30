@@ -113,7 +113,7 @@ MonoBehaviour:
   playerWalkSpeed: 6
   playerRunSpeed: 12
   gravity: -19.62
-  canPush: 1
+  canPush: 0
   pushPower: 0.8
   canJump: 1
   jumpPower: 2.5
