@@ -3,7 +3,12 @@ guid: 3ffebbc7eb3b50444b40058f6700be5a
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_Museum_Ramp
+    second: {fileID: 2100000, guid: 574b94088ecac1d42b3f8be7bbe471e6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
