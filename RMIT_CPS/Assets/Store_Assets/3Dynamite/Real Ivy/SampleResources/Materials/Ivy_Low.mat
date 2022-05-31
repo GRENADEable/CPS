@@ -116,9 +116,9 @@ Material:
     - _ReceivesSSR: 1
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _Smoothness: 0.718
+    - _Smoothness: 0.147
     - _SmoothnessTextureChannel: 0
-    - _Specular: 0.136
+    - _Specular: 0.234
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _StencilRef: 2
@@ -146,3 +146,4 @@ Material:
     - _Color: {r: 1, g: 0.95428574, b: 0.888, a: 1}
     - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

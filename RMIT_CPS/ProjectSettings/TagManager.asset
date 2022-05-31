@@ -8,6 +8,7 @@ TagManager:
   - Item_Drop_Parent
   - Examine_Pos
   - Flashlight
+  - Death
   layers:
   - Default
   - TransparentFX
