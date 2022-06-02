@@ -7,11 +7,6 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mat_Museum_Ground
-    second: {fileID: 2100000, guid: f82d372322fdd9641884e989fe124b93, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: mat_Museum_Mirror
     second: {fileID: 2100000, guid: 3a18da250b88fba44b4fbb1fc3411fe1, type: 2}
   - first:
