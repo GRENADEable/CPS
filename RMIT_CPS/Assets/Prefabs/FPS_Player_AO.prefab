@@ -40,11 +40,11 @@ GameObject:
   m_Component:
   - component: {fileID: 93234601408959341}
   - component: {fileID: 93234601408959340}
-  - component: {fileID: 8231377412732296299}
+  - component: {fileID: 3483076083041583083}
+  - component: {fileID: 5204471886652650218}
   - component: {fileID: 539963253125744703}
-  - component: {fileID: 1763410158725020158}
-  - component: {fileID: -3405502998002964541}
   - component: {fileID: 2217819814711589067}
+  - component: {fileID: 6167169681861590837}
   m_Layer: 0
   m_Name: FPS_Player_AO
   m_TagString: Player
@@ -92,7 +92,26 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.005
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &8231377412732296299
+--- !u!95 &3483076083041583083
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93234601408959342}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 40f9e6aab02704b4e95e67e3b97755a0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5204471886652650218
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,7 +120,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 93234601408959342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c100ba7b2cce60408ebdb0f7611fa66, type: 3}
+  m_Script: {fileID: 11500000, guid: e8516d3700a969d4ebebf3e5559da813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gmData: {fileID: 11400000, guid: 73d00e7781226674f8e47e1e45afeab4, type: 2}
@@ -114,12 +133,13 @@ MonoBehaviour:
   playerRunSpeed: 12
   gravity: -19.62
   canPush: 0
-  pushPower: 0.8
+  pushPower: 2
+  playerFootStepAnim: {fileID: 3483076083041583083}
   canJump: 1
   jumpPower: 2.5
   rayHeight: {x: 0, y: 1.5, z: 0}
   rayRoofDistance: 2
-  crouchWalkSpeed: 1.5
+  crouchWalkSpeed: 4
   crouchColShrinkValue: 0.6
   crouchColCenterValue: 0.6
   groundCheck: {fileID: 93234601371468475}
@@ -128,6 +148,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 40960
+  _isPlayingFootstepSFX: 0
 --- !u!114 &539963253125744703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,45 +167,9 @@ MonoBehaviour:
   mouseSens: 450
   playerRoot: {fileID: 93234601408959341}
   CinemachineCameraTarget: {fileID: 8182779951028210431}
---- !u!114 &1763410158725020158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 93234601408959342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eac016e6bd120a4cadcf558d1080974, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gmData: {fileID: 11400000, guid: 73d00e7781226674f8e47e1e45afeab4, type: 2}
-  isUsingScriptableObject: 1
-  interactKey: 101
-  keyLayer:
-    serializedVersion: 2
-    m_Bits: 131072
-  doorLayer:
-    serializedVersion: 2
-    m_Bits: 262144
-  rayDistance: 2
---- !u!114 &-3405502998002964541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 93234601408959342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2d483dec6d685d4fbdc242bb59be0f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnabled: 0
-  lightKey: 102
-  flashLightPrefabObj: {fileID: 4334287265348815412, guid: 64a5bcfcea1ded44fbbb73d4eabe038a, type: 3}
-  flashLightSceneObj: {fileID: 0}
-  speed: 3
+  footstepAud: {fileID: 6167169681861590837}
+  footStepsSfx: {fileID: 8300000, guid: 0da96eee8196c0f4bb858d488abf1738, type: 3}
+  footstepVolume: 0.3
 --- !u!114 &2217819814711589067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +188,102 @@ MonoBehaviour:
   zoomKey: 324
   zoomFovVal: 25
   lerpTime: 10
+--- !u!82 &6167169681861590837
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93234601408959342}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &93234601410974908
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,6 +670,9 @@ MonoBehaviour:
   mouseSens: 450
   playerRoot: {fileID: 93234601408959341}
   CinemachineCameraTarget: {fileID: 0}
+  footstepAud: {fileID: 0}
+  footStepsSfx: {fileID: 0}
+  footstepVolume: 0
 --- !u!1 &2481055708102680158
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,6 +30,19 @@ namespace RedMountMedia
         [SerializeField]
         [Tooltip("Cinemachine Camera Target")]
         private GameObject CinemachineCameraTarget;
+
+        [Space, Header("Footsteps")]
+        [SerializeField]
+        [Tooltip("Footsteps SFX Audio Source")]
+        private AudioSource footstepAud;
+
+        [SerializeField]
+        [Tooltip("Footsteps SFX Audio Clips")]
+        private AudioClip footStepsSfx;
+
+        [SerializeField]
+        [Tooltip("Footsteps SFX Volume")]
+        [Range(0f, 1f)] private float footstepVolume;
         #endregion
 
         #region Private Variables
@@ -62,6 +75,18 @@ namespace RedMountMedia
             if (lfAngle < -360f) lfAngle += 360f;
             if (lfAngle > 360f) lfAngle -= 360f;
             return Mathf.Clamp(lfAngle, lfMin, lfMax);
+        }
+
+        public void FootStep1()
+        {
+            footstepAud.pitch = Random.Range(0.8f, 1f);
+            footstepAud.PlayOneShot(footStepsSfx, footstepVolume);
+        }
+
+        public void FootStep2()
+        {
+            footstepAud.pitch = Random.Range(0.8f, 1f);
+            footstepAud.PlayOneShot(footStepsSfx, footstepVolume);
         }
         #endregion
     }
