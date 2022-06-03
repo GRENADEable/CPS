@@ -35,6 +35,10 @@ public class GameManagerArchivalObject : MonoBehaviour
     [SerializeField]
     [Tooltip("Pause Buttons")]
     private Button[] pauseButtons = default;
+
+    [SerializeField]
+    [Tooltip("Darken Image Component")]
+    private Image darkenImg = default;
     #endregion
 
     #region Animators
@@ -73,6 +77,10 @@ public class GameManagerArchivalObject : MonoBehaviour
     [SerializeField]
     [Tooltip("Room 2 Door GameObject")]
     private GameObject room2DoorObj = default;
+
+    [SerializeField]
+    [Tooltip("Platform Array")]
+    private GameObject[] platforms = default;
     #endregion
 
     #region Transforms
@@ -103,6 +111,24 @@ public class GameManagerArchivalObject : MonoBehaviour
     [SerializeField]
     [Tooltip("When will the 2nd room door appear?")]
     private float room2DoorDelay = default;
+
+    [SerializeField]
+    [Tooltip("Sunlight Intensity Increment")]
+    private float lightIntensityIncrement = default;
+
+    [SerializeField]
+    [Tooltip("Darken BG Alpha Decrement")]
+    private float darkenBGDecrement = default;
+
+    [SerializeField]
+    [Tooltip("Fog Intensity Decrement")]
+    private float fogintensityDecrement = default;
+    #endregion
+
+    #region Others
+    [SerializeField]
+    [Tooltip("Sunlight")]
+    private Light mainLight = default;
     #endregion
 
     #region Events Float
@@ -122,6 +148,8 @@ public class GameManagerArchivalObject : MonoBehaviour
     private Vector3 _intialRoom2Size = default;
     private bool _isRoom2GettingSmall = default;
     private CharacterController _charControl = default;
+    private int _currPlatform = default;
+    private float _currDarkenUI = default;
     #endregion
 
     #region Unity Callbacks
@@ -129,17 +157,23 @@ public class GameManagerArchivalObject : MonoBehaviour
     #region Events
     void OnEnable()
     {
+        FPSControllerAO.OnPlayerDead += OnPlayerDeadEventReceived;
 
+        TreeGrowth.OnTreeFullyGrown += OnTreeFullyGrownEventReceived;
     }
 
     void OnDisable()
     {
+        FPSControllerAO.OnPlayerDead += OnPlayerDeadEventReceived;
 
+        TreeGrowth.OnTreeFullyGrown -= OnTreeFullyGrownEventReceived;
     }
 
     void OnDestroy()
     {
+        FPSControllerAO.OnPlayerDead -= OnPlayerDeadEventReceived;
 
+        TreeGrowth.OnTreeFullyGrown -= OnTreeFullyGrownEventReceived;
     }
     #endregion
 
@@ -149,6 +183,7 @@ public class GameManagerArchivalObject : MonoBehaviour
         StartCoroutine(StartDelay());
         _intialRoom2Size = room2Obj.transform.localScale;
         _charControl = playerRoot.GetComponent<CharacterController>();
+        _currDarkenUI = 0.9f;
 
         if (isCursorDisabled)
             gmData.DisableCursor();
@@ -355,6 +390,35 @@ public class GameManagerArchivalObject : MonoBehaviour
     #endregion
 
     #region Events
+    /// <summary>
+    /// Subbed to event from FPSControllerBasicWeek9 Script;
+    /// Restarts the Game with delay;
+    /// </summary>
+    void OnPlayerDeadEventReceived() => StartCoroutine(RestartGameDelay());
 
+    public void OnFogEnable()
+    {
+        RenderSettings.fog = true;
+    }
+
+    /// <summary>
+    /// Subbed to event from FPSControllerBasicWeek9 Script;
+    /// Changes the lighting and UI to be more clearer;
+    /// </summary>
+    void OnTreeFullyGrownEventReceived()
+    {
+        platforms[_currPlatform].SetActive(true);
+        _currPlatform++;
+
+        mainLight.intensity = Mathf.Clamp01(mainLight.intensity);
+        mainLight.intensity += lightIntensityIncrement;
+
+        _currDarkenUI -= darkenBGDecrement;
+        Color darkColour = darkenImg.color;
+        darkColour.a = _currDarkenUI;
+        darkenImg.color = darkColour;
+
+        RenderSettings.fogDensity -= fogintensityDecrement;
+    }
     #endregion
 }
