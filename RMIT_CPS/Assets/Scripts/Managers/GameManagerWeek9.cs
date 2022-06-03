@@ -30,11 +30,40 @@ public class GameManagerWeek9 : MonoBehaviour
     [SerializeField]
     [Tooltip("Fade Image Animation Component")]
     private Animator fadeBG = default;
+
+    [SerializeField]
+    [Tooltip("Darken Image Component")]
+    private Image darkenImg = default;
+
+    [SerializeField]
+    [Tooltip("Intro Text GameObject")]
+    private GameObject introText = default;
+
+    [SerializeField]
+    [Tooltip("End Text GameObject")]
+    private GameObject endText = default;
+    #endregion
+
+    #region Game
+    [Space, Header("Game")]
+    [SerializeField]
+    [Tooltip("Platform Array")]
+    private GameObject[] platforms = default;
+
+    [SerializeField]
+    [Tooltip("Sunlight")]
+    private Light mainLight = default;
+
+    [SerializeField]
+    [Tooltip("Sunlight Intensity Increment")]
+    private float lightIntensityIncrement = default;
     #endregion
 
     #endregion
 
     #region Private Variables
+    private int _currPlatform = default;
+    private float _currDarkenUI = default;
     #endregion
 
     #region Unity Callbacks
@@ -42,17 +71,26 @@ public class GameManagerWeek9 : MonoBehaviour
     #region Events
     void OnEnable()
     {
-        FPSControllerBasicWeek10.OnPlayerDead += OnPlayerDeadEventReceived;
+        FPSControllerBasicWeek9.OnPlayerDead += OnPlayerDeadEventReceived;
+
+        TreeGrowth.OnTreeFullyGrown += OnTreeFullyGrownEventReceived;
+        TreeGrowth.OnTreeFullyGrownFinal += OnTreeFullyGrownFinalEventReceived;
     }
 
     void OnDisable()
     {
-        FPSControllerBasicWeek10.OnPlayerDead -= OnPlayerDeadEventReceived;
+        FPSControllerBasicWeek9.OnPlayerDead -= OnPlayerDeadEventReceived;
+
+        TreeGrowth.OnTreeFullyGrown -= OnTreeFullyGrownEventReceived;
+        TreeGrowth.OnTreeFullyGrownFinal -= OnTreeFullyGrownFinalEventReceived;
     }
 
     void OnDestroy()
     {
-        FPSControllerBasicWeek10.OnPlayerDead -= OnPlayerDeadEventReceived;
+        FPSControllerBasicWeek9.OnPlayerDead -= OnPlayerDeadEventReceived;
+
+        TreeGrowth.OnTreeFullyGrown -= OnTreeFullyGrownEventReceived;
+        TreeGrowth.OnTreeFullyGrownFinal -= OnTreeFullyGrownFinalEventReceived;
     }
     #endregion
 
@@ -60,6 +98,7 @@ public class GameManagerWeek9 : MonoBehaviour
     {
         StartCoroutine(StartDelay());
         DisableCursor();
+        _currDarkenUI = 0.9f;
 #if UNITY_WEBGL
         // Disables the Quit button on WebGL;
         pauseButtons[3].interactable = false;
@@ -206,6 +245,7 @@ public class GameManagerWeek9 : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Application.Quit();
     }
+    #endregion
 
     /// <summary>
     /// Ends with a Delay;
@@ -214,20 +254,57 @@ public class GameManagerWeek9 : MonoBehaviour
     IEnumerator EndGameDelay()
     {
         _currGameState = GameState.Outro;
-        yield return new WaitForSeconds(0.5f);
+        introText.SetActive(false);
+        endText.SetActive(true);
+        yield return new WaitForSeconds(4.5f);
         fadeBG.Play("Fade_Out");
+        yield return new WaitForSeconds(0.5f);
         ChangeScene(0);
     }
-    #endregion
 
     #endregion
 
     #region Events
 
     /// <summary>
-    /// Subbed to event from FPSControllerBasicWeek10 Script
+    /// Subbed to event from FPSControllerBasicWeek9 Script;
     /// Restarts the Game with delay;
     /// </summary>
     void OnPlayerDeadEventReceived() => StartCoroutine(RestartGameDelay());
+
+    /// <summary>
+    /// Subbed to event from FPSControllerBasicWeek9 Script;
+    /// Changes the lighting and UI to be more clearer;
+    /// </summary>
+    void OnTreeFullyGrownEventReceived()
+    {
+        platforms[_currPlatform].SetActive(true);
+        _currPlatform++;
+
+        mainLight.intensity = Mathf.Clamp01(mainLight.intensity);
+        mainLight.intensity += lightIntensityIncrement;
+
+        _currDarkenUI -= 0.1f;
+        Color darkColour = darkenImg.color;
+        darkColour.a = _currDarkenUI;
+        darkenImg.color = darkColour;
+    }
+
+    /// <summary>
+    /// Subbed to event from FPSControllerBasicWeek9 Script;
+    /// Ends the game with delay;
+    /// </summary>
+    void OnTreeFullyGrownFinalEventReceived()
+    {
+        mainLight.intensity = Mathf.Clamp01(mainLight.intensity);
+        mainLight.intensity += lightIntensityIncrement;
+
+        _currDarkenUI -= 0.1f;
+        Color darkColour = darkenImg.color;
+        darkColour.a = _currDarkenUI;
+        darkenImg.color = darkColour;
+
+        StartCoroutine(EndGameDelay());
+    }
     #endregion
 }
