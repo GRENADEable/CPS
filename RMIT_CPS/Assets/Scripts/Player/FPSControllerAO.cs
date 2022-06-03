@@ -156,17 +156,23 @@ public class FPSControllerAO : MonoBehaviour
     #region Events
     void OnEnable()
     {
-        GameManagerArchivalObject.OnSpeedToggle += OnRunSpeedToggleEventReceived;
+        GameManagerArchivalObject.OnSpeedRunToggle += OnSpeedRunToggleEventReceived;
+        GameManagerArchivalObject.OnSpeedWalkToggle += OnSpeedWalkToggleEventReceived;
+        GameManagerArchivalObject.OnPlayingSFX += OnPlayingSFXEventReceived;
     }
 
     void OnDisable()
     {
-        GameManagerArchivalObject.OnSpeedToggle -= OnRunSpeedToggleEventReceived;
+        GameManagerArchivalObject.OnSpeedRunToggle -= OnSpeedRunToggleEventReceived;
+        GameManagerArchivalObject.OnSpeedWalkToggle -= OnSpeedWalkToggleEventReceived;
+        GameManagerArchivalObject.OnPlayingSFX -= OnPlayingSFXEventReceived;
     }
 
     void OnDestroy()
     {
-        GameManagerArchivalObject.OnSpeedToggle -= OnRunSpeedToggleEventReceived;
+        GameManagerArchivalObject.OnSpeedRunToggle -= OnSpeedRunToggleEventReceived;
+        GameManagerArchivalObject.OnSpeedWalkToggle -= OnSpeedWalkToggleEventReceived;
+        GameManagerArchivalObject.OnPlayingSFX -= OnPlayingSFXEventReceived;
     }
     #endregion
 
@@ -314,6 +320,7 @@ public class FPSControllerAO : MonoBehaviour
         if (_isRunning) // Run
         {
             _currSpeed = playerRunSpeed;
+            playerFootStepAnim.speed = 1.5f;
             //Debug.Log("Running");
         }
         else if (_isCrouching) // Crouch
@@ -321,12 +328,14 @@ public class FPSControllerAO : MonoBehaviour
             localHeight = _playerHeight * crouchColShrinkValue;
             localCenter = _playerCenter / crouchColCenterValue;
             _currSpeed = crouchWalkSpeed;
+            playerFootStepAnim.speed = 0.8f;
             //Debug.Log("Crouching");
             CheckCrouch();
         }
         else // Walk
         {
             _currSpeed = playerWalkSpeed;
+            playerFootStepAnim.speed = 0.8f;
             //Debug.Log("Walking");
         }
 
@@ -365,9 +374,32 @@ public class FPSControllerAO : MonoBehaviour
     #region Events
     /// <summary>
     /// Subbed to event from GameManagerArchivalObject Script;
-    /// Changes the speed of the Player;
+    /// Changes the run speed of the Player;
     /// </summary>
-    /// <param name="speed"> Player Speed; </param>
-    void OnRunSpeedToggleEventReceived(float speed) => playerRunSpeed = speed;
+    /// <param name="speed"> Player run Speed; </param>
+    void OnSpeedRunToggleEventReceived(float speed) => playerRunSpeed = speed;
+
+    /// <summary>
+    /// Subbed to event from GameManagerArchivalObject Script;
+    /// Changes the walk speed of the Player;
+    /// </summary>
+    /// <param name="speed"> Player walk Speed; </param>
+    void OnSpeedWalkToggleEventReceived(float speed) => playerWalkSpeed = speed;
+
+    /// <summary>
+    /// Subbed to event from GameManagerArchivalObject Script;
+    /// Plays the footstep SFX
+    /// </summary>
+    /// <param name="isPlayingSFX"> If true, play footstep SFX else don't; </param>
+    void OnPlayingSFXEventReceived(bool isPlayingSFX)
+    {
+        if (isPlayingSFX)
+            _isPlayingFootstepSFX = true;
+        else
+        {
+            _isPlayingFootstepSFX = false;
+            playerFootStepAnim.SetBool("isMoving", false);
+        }
+    }
     #endregion
 }

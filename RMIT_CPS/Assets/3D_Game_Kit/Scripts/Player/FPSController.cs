@@ -145,17 +145,17 @@ namespace RedMountMedia
         #region Events
         void OnEnable()
         {
-            GameManagerArchivalObject.OnSpeedToggle += OnRunSpeedToggleEventReceived;
+            GameManagerArchivalObject.OnSpeedRunToggle += OnRunSpeedToggleEventReceived;
         }
 
         void OnDisable()
         {
-            GameManagerArchivalObject.OnSpeedToggle -= OnRunSpeedToggleEventReceived;
+            GameManagerArchivalObject.OnSpeedRunToggle -= OnRunSpeedToggleEventReceived;
         }
 
         void OnDestroy()
         {
-            GameManagerArchivalObject.OnSpeedToggle -= OnRunSpeedToggleEventReceived;
+            GameManagerArchivalObject.OnSpeedRunToggle -= OnRunSpeedToggleEventReceived;
         }
         #endregion
 

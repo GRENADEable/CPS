@@ -20,6 +20,9 @@ public class GameManagerArchivalObject : MonoBehaviour
 
     #region Cinemachine Cams
     [Space, Header("Cinemachine Cameras")]
+    [SerializeField]
+    [Tooltip("Camera for Room 10")]
+    private Camera camRoom10;
 
     [SerializeField]
     [Tooltip("LayerMask to switch to")]
@@ -28,6 +31,18 @@ public class GameManagerArchivalObject : MonoBehaviour
     [SerializeField]
     [Tooltip("Default LayerMask")]
     private LayerMask defaultLayer = default;
+
+    [SerializeField]
+    [Tooltip("Player Follow Virutal Cam")]
+    private GameObject vCamPlayerFollow = default;
+
+    [SerializeField]
+    [Tooltip("Room 1 Virutal Cam")]
+    private GameObject vCamRoom1 = default;
+
+    [SerializeField]
+    [Tooltip("Room 10 Virutal Cam")]
+    private GameObject vCamRoom10 = default;
     #endregion
 
     #region UI
@@ -135,9 +150,24 @@ public class GameManagerArchivalObject : MonoBehaviour
     public delegate void SendEventsFloat(float floatIndex);
     /// <summary>
     /// Event sent from GameManagerArchivalObject to FPSController Scripts;
-    /// Changes the Player's speed;
+    /// Changes the Player's run speed;
     /// </summary>
-    public static event SendEventsFloat OnSpeedToggle;
+    public static event SendEventsFloat OnSpeedRunToggle;
+
+    /// <summary>
+    /// Event sent from GameManagerArchivalObject to FPSController Scripts;
+    /// Changes the Player's walk speed;
+    /// </summary>
+    public static event SendEventsFloat OnSpeedWalkToggle;
+    #endregion
+
+    #region Event Bool
+    public delegate void SendEventsBool(bool isPlayingSFX);
+    /// <summary>
+    /// Event setn from GameManagerArchivalObject to FPSControllerAO;
+    /// Enables and disable Player Footstep SFX;
+    /// </summary>
+    public static event SendEventsBool OnPlayingSFX = default;
     #endregion
 
     #endregion
@@ -255,7 +285,7 @@ public class GameManagerArchivalObject : MonoBehaviour
     }
     #endregion
 
-    #region Room 1
+    #region Player
     /// <summary>
     /// Switches the layer of the Camera's CullingMask;
     /// Also toggles the main Virutal Camera GameObject;
@@ -267,11 +297,48 @@ public class GameManagerArchivalObject : MonoBehaviour
         {
             hudPanel.SetActive(false);
             _cam.cullingMask = switchLayer;
+            camRoom10.cullingMask = switchLayer;
         }
         else
         {
             hudPanel.SetActive(true);
             _cam.cullingMask = defaultLayer;
+            camRoom10.cullingMask = defaultLayer;
+        }
+    }
+
+    /// <summary>
+    /// Subbed to level triggers;
+    /// Changes the run speed of the player;
+    /// </summary>
+    /// <param name="speed"> Run wpeed variable for the player; </param>
+    public void OnPlayerRunSpeed(float speed) => OnSpeedRunToggle?.Invoke(speed);
+
+    /// <summary>
+    /// Subbed to level triggers;
+    /// Changes the walk speed of the player;
+    /// </summary>
+    /// <param name="speed"> Walk speed variable for the player; </param>
+    public void OnPlayerWalkSpeed(float speed) => OnSpeedWalkToggle?.Invoke(speed);
+    #endregion
+
+    #region Room 1
+    /// <summary>
+    /// Tied to Room_1 Trigger Event;
+    /// Changes the camera;
+    /// </summary>
+    /// <param name="isEnabled"> If true, changes camera to third person, else back to first person; </param>
+    public void OnRoom1CamToggle(bool isEnabled)
+    {
+        if (isEnabled)
+        {
+            vCamRoom1.SetActive(true);
+            vCamPlayerFollow.SetActive(false);
+        }
+        else
+        {
+            vCamRoom1.SetActive(false);
+            vCamPlayerFollow.SetActive(true);
         }
     }
 
@@ -288,13 +355,6 @@ public class GameManagerArchivalObject : MonoBehaviour
     }
 
     /// <summary>
-    /// Subbed to level trigger for room 1;
-    /// Changes the speed of the player;
-    /// </summary>
-    /// <param name="speed"> Speed variable for the player; </param>
-    public void OnIsPlayerSpeedy(float speed) => OnSpeedToggle?.Invoke(speed);
-
-    /// <summary>
     /// Crane rotation;
     /// </summary>
     void RotatingCrane()
@@ -305,14 +365,54 @@ public class GameManagerArchivalObject : MonoBehaviour
     #endregion
 
     #region Room 2
+    /// <summary>
+    /// Starts the Sequence when the player enters the trigger;
+    /// </summary>
     public void OnRoom2Event() => StartCoroutine(Room2Sequence());
 
+    /// <summary>
+    /// Decrease of room size over time;
+    /// </summary>
     void Room2Size()
     {
         if (_isRoom2GettingSmall)
             room2Obj.transform.localScale = Vector3.Lerp(room2Obj.transform.localScale, Vector3.zero, room2ShrinkChangeSpeed * Time.deltaTime);
         else
             room2Obj.transform.localScale = Vector3.Lerp(room2Obj.transform.localScale, _intialRoom2Size, room2ExpandChangeSpeed * Time.deltaTime);
+    }
+    #endregion
+
+    #region Room 9
+    /// <summary>
+    /// Enables the fog from the Render settings;
+    /// </summary>
+    public void OnFogEnable() => RenderSettings.fog = true;
+    #endregion
+
+    #region Room 10
+    /// <summary>
+    /// Tied to Room_10 Trigger Event;
+    /// Changes the camera;
+    /// </summary>
+    /// <param name="isEnabled"> If true, changes camera to third person, else back to first person; </param>
+    public void OnRoom10CamToggle(bool isEnabled)
+    {
+        if (isEnabled)
+        {
+            vCamRoom10.SetActive(true);
+            vCamPlayerFollow.SetActive(false);
+            _cam.gameObject.SetActive(false);
+            camRoom10.gameObject.SetActive(true);
+            OnPlayingSFX?.Invoke(true);
+        }
+        else
+        {
+            vCamRoom10.SetActive(false);
+            vCamPlayerFollow.SetActive(true);
+            _cam.gameObject.SetActive(true);
+            camRoom10.gameObject.SetActive(false);
+            OnPlayingSFX?.Invoke(false);
+        }
     }
     #endregion
 
@@ -373,6 +473,7 @@ public class GameManagerArchivalObject : MonoBehaviour
     }
     #endregion
 
+    #region Game
     IEnumerator Room2Sequence()
     {
         stickmanFlickerAnim.Play("Stickman_Flicker_Anim");
@@ -389,17 +490,14 @@ public class GameManagerArchivalObject : MonoBehaviour
     }
     #endregion
 
+    #endregion
+
     #region Events
     /// <summary>
     /// Subbed to event from FPSControllerBasicWeek9 Script;
     /// Restarts the Game with delay;
     /// </summary>
     void OnPlayerDeadEventReceived() => StartCoroutine(RestartGameDelay());
-
-    public void OnFogEnable()
-    {
-        RenderSettings.fog = true;
-    }
 
     /// <summary>
     /// Subbed to event from FPSControllerBasicWeek9 Script;
