@@ -250,6 +250,7 @@ public class GameManagerArchivalObject : MonoBehaviour
 
     void Start()
     {
+        RenderSettings.fog = false;
         _cam = Camera.main;
         StartCoroutine(StartDelay());
         _intialRoom2Size = room2Obj.transform.localScale;
