@@ -68,7 +68,15 @@ public class GameManagerArchivalObject : MonoBehaviour
 
     [SerializeField]
     [Tooltip("Array of Audio SFX")]
-    private AudioClip[] sfxClips = default;
+    private AudioClip[] sFXClips = default;
+
+    [SerializeField]
+    [Tooltip("Array of Audio Voice Over SFX")]
+    private AudioClip[] voiceOverSFX = default;
+
+    [SerializeField]
+    [Tooltip("Voice Over SFX Volume")]
+    [Range(0f, 1f)] private float voiceOverSFXVol = default;
     #endregion
 
     #region Animators
@@ -107,6 +115,10 @@ public class GameManagerArchivalObject : MonoBehaviour
     [SerializeField]
     [Tooltip("Room 2 Door GameObject")]
     private GameObject room2DoorObj = default;
+
+    [SerializeField]
+    [Tooltip("Voice Over Room 2 Post SFX GameObject")]
+    private GameObject voiceOverRoom2PostObj = default;
 
     [SerializeField]
     [Tooltip("Platform Array")]
@@ -297,6 +309,14 @@ public class GameManagerArchivalObject : MonoBehaviour
         gmData.EnableCursor();
         pausePanel.SetActive(true);
         hudPanel.SetActive(false);
+    }
+    #endregion
+
+    #region Voice Overs
+    public void OnRoomVO(int voiceIndex)
+    {
+        oneShotSFXAud.Stop();
+        oneShotSFXAud.PlayOneShot(voiceOverSFX[voiceIndex], voiceOverSFXVol);
     }
     #endregion
 
@@ -496,7 +516,8 @@ public class GameManagerArchivalObject : MonoBehaviour
     IEnumerator Room2Sequence()
     {
         stickmanFlickerAnim.Play("Stickman_Flicker_Anim");
-        oneShotSFXAud.PlayOneShot(sfxClips[0]);
+        oneShotSFXAud.Stop();
+        oneShotSFXAud.PlayOneShot(sFXClips[0]);
         _charControl.enabled = false;
         playerRoot.transform.position = room2TeleportPos.position;
         _charControl.enabled = true;
@@ -506,8 +527,9 @@ public class GameManagerArchivalObject : MonoBehaviour
         _isRoom2GettingSmall = false;
         stickmanFlickerAnim.Play("Empty");
         yield return new WaitForSeconds(room2DoorDelay);
-        oneShotSFXAud.PlayOneShot(sfxClips[1]);
+        oneShotSFXAud.PlayOneShot(sFXClips[1]);
         room2DoorObj.SetActive(false);
+        voiceOverRoom2PostObj.SetActive(true);
     }
     #endregion
 

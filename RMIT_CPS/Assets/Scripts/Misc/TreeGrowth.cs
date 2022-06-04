@@ -28,7 +28,7 @@ public class TreeGrowth : MonoBehaviour
     #endregion
 
     #region Private Variables
-    [SerializeField] private AudioSource _oneShotSFXAud = default;
+    private AudioSource _oneShotSFXAud = default;
     #endregion
 
     #region Unity Callbacks
