@@ -124,6 +124,7 @@ namespace RedMountMedia
         {
             inventoryPanel.SetActive(false);
             OnHudEnabled?.Invoke(true);
+            gmData.DisableCursor();
             gmData.ChangeGameState("Game");
         }
 
@@ -136,6 +137,7 @@ namespace RedMountMedia
             {
                 inventoryPanel.SetActive(true);
                 OnHudEnabled?.Invoke(false);
+                gmData.EnableCursor();
                 gmData.ChangeGameState("Inventory");
             }
         }
@@ -151,7 +153,7 @@ namespace RedMountMedia
             if (!GameObject.FindGameObjectWithTag("Item_Drop_Pos"))
             {
                 Debug.LogError("Missing item drop position transform. Is the Player missing in the scene?");
-                //Debug.Break();
+                Debug.Break();
                 return;
             }
             else if (!GameObject.FindGameObjectWithTag("Item_Drop_Parent"))

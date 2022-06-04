@@ -132,7 +132,7 @@ public class FPSControllerAO : MonoBehaviour
     private Vector3 _vel = default;
     private float _currSpeed = default;
     private bool _isRunning = default;
-    [SerializeField] private bool _isPlayingFootstepSFX = default;
+    private bool _isPlayingFootstepSFX = default;
     #endregion
 
     #region Player Crouch

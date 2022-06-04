@@ -56,6 +56,21 @@ public class GameManagerArchivalObject : MonoBehaviour
     private Image darkenImg = default;
     #endregion
 
+    #region Audio
+    [Space, Header("Audios")]
+    [SerializeField]
+    [Tooltip("One Shot SFX Aud")]
+    private AudioSource oneShotSFXAud = default;
+
+    [SerializeField]
+    [Tooltip("Watering Can BG Aud")]
+    private AudioSource wateringCanBGAud = default;
+
+    [SerializeField]
+    [Tooltip("Array of Audio SFX")]
+    private AudioClip[] sfxClips = default;
+    #endregion
+
     #region Animators
     [Space, Header("Animators")]
     [SerializeField]
@@ -386,7 +401,11 @@ public class GameManagerArchivalObject : MonoBehaviour
     /// <summary>
     /// Enables the fog from the Render settings;
     /// </summary>
-    public void OnFogEnable() => RenderSettings.fog = true;
+    public void OnFogEnable()
+    {
+        RenderSettings.fog = true;
+        wateringCanBGAud.Play();
+    }
     #endregion
 
     #region Room 10
@@ -477,6 +496,7 @@ public class GameManagerArchivalObject : MonoBehaviour
     IEnumerator Room2Sequence()
     {
         stickmanFlickerAnim.Play("Stickman_Flicker_Anim");
+        oneShotSFXAud.PlayOneShot(sfxClips[0]);
         _charControl.enabled = false;
         playerRoot.transform.position = room2TeleportPos.position;
         _charControl.enabled = true;
@@ -486,6 +506,7 @@ public class GameManagerArchivalObject : MonoBehaviour
         _isRoom2GettingSmall = false;
         stickmanFlickerAnim.Play("Empty");
         yield return new WaitForSeconds(room2DoorDelay);
+        oneShotSFXAud.PlayOneShot(sfxClips[1]);
         room2DoorObj.SetActive(false);
     }
     #endregion
@@ -517,6 +538,12 @@ public class GameManagerArchivalObject : MonoBehaviour
         darkenImg.color = darkColour;
 
         RenderSettings.fogDensity -= fogintensityDecrement;
+
+        if (_currPlatform >= 3)
+        {
+            RenderSettings.fog = false;
+            wateringCanBGAud.Stop();
+        }
     }
     #endregion
 }
