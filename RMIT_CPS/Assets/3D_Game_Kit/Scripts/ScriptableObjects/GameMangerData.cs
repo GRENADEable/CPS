@@ -6,7 +6,7 @@ public class GameMangerData : ScriptableObject
     #region Public Variables
     [Space, Header("Enums")]
     public GameState currState = GameState.Game;
-    public enum GameState { Intro, IntroCutscene, Game, Exit, Inventory, Examine };
+    public enum GameState { Intro, Game, Exit, Inventory, Examine, OutroCutscene };
     #endregion
 
     #region My Functions
@@ -77,9 +77,6 @@ public class GameMangerData : ScriptableObject
         if (state.Contains("Intro"))
             currState = GameState.Intro;
 
-        if (state.Contains("IntroCutscene"))
-            currState = GameState.IntroCutscene;
-
         if (state.Contains("Game"))
             currState = GameState.Game;
 
@@ -91,6 +88,9 @@ public class GameMangerData : ScriptableObject
 
         if (state.Contains("Examine"))
             currState = GameState.Examine;
+
+        if (state.Contains("OutroCutscene"))
+            currState = GameState.OutroCutscene;
     }
     #endregion
 

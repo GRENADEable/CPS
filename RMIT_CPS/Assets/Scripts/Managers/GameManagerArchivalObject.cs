@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Playables;
 
 public class GameManagerArchivalObject : MonoBehaviour
 {
@@ -67,6 +68,10 @@ public class GameManagerArchivalObject : MonoBehaviour
     private AudioSource wateringCanBGAud = default;
 
     [SerializeField]
+    [Tooltip("Museum BG Aud")]
+    private AudioSource museumBGAud = default;
+
+    [SerializeField]
     [Tooltip("Array of Audio SFX")]
     private AudioClip[] sFXClips = default;
 
@@ -130,6 +135,10 @@ public class GameManagerArchivalObject : MonoBehaviour
     [SerializeField]
     [Tooltip("Room 2 Teleport Position")]
     private Transform room2TeleportPos = default;
+
+    [SerializeField]
+    [Tooltip("Starting Point")]
+    private Transform startingPos = default;
     #endregion
 
     #region Floats
@@ -168,9 +177,14 @@ public class GameManagerArchivalObject : MonoBehaviour
     #endregion
 
     #region Others
+    [Space, Header("Others")]
     [SerializeField]
     [Tooltip("Sunlight")]
     private Light mainLight = default;
+
+    [SerializeField]
+    [Tooltip("Timeline Outro")]
+    private PlayableDirector outroTimeline = default;
     #endregion
 
     #region Events Float
@@ -425,6 +439,7 @@ public class GameManagerArchivalObject : MonoBehaviour
     {
         RenderSettings.fog = true;
         wateringCanBGAud.Play();
+        mainLight.intensity = 0.1f;
     }
     #endregion
 
@@ -452,6 +467,41 @@ public class GameManagerArchivalObject : MonoBehaviour
             camRoom10.gameObject.SetActive(false);
             OnPlayingSFX?.Invoke(false);
         }
+    }
+    #endregion
+
+    #region Room End
+    /// <summary>
+    /// Tied to the Level Trigger;
+    /// Ends the game with the outro;F
+    /// </summary>
+    public void OnRoomEnded() => StartCoroutine(EndDelay());
+
+    /// <summary>
+    /// Tied to the Outro Timeline;
+    /// Resets the Game to the intial state;
+    /// </summary>
+    public void OnOutroEnded()
+    {
+        playerRoot.SetActive(true);
+        gmData.ChangeGameState("Game");
+        outroTimeline.gameObject.SetActive(false);
+        hudPanel.SetActive(true);
+        vCamPlayerFollow.SetActive(true);
+    }
+
+    /// <summary>
+    /// Resets all the camera and players settings;
+    /// </summary>
+    void ResetState()
+    {
+        OnRoom10CamToggle(false);
+        OnSwitchCameraLayer(false);
+        OnPlayerWalkSpeed(6);
+        OnPlayerRunSpeed(12);
+        playerRoot.SetActive(false);
+        playerRoot.transform.position = startingPos.position;
+        playerRoot.transform.rotation = startingPos.rotation;
     }
     #endregion
 
@@ -513,6 +563,10 @@ public class GameManagerArchivalObject : MonoBehaviour
     #endregion
 
     #region Game
+    /// <summary>
+    /// Starts the Room 2 horror sequence;
+    /// </summary>
+    /// <returns> Float Delay; </returns>
     IEnumerator Room2Sequence()
     {
         stickmanFlickerAnim.Play("Stickman_Flicker_Anim");
@@ -530,6 +584,24 @@ public class GameManagerArchivalObject : MonoBehaviour
         oneShotSFXAud.PlayOneShot(sFXClips[1]);
         room2DoorObj.SetActive(false);
         voiceOverRoom2PostObj.SetActive(true);
+    }
+
+    /// <summary>
+    /// Ends game with delay;
+    /// Shows Outro;
+    /// </summary>
+    /// <returns> Float Delay; </returns>
+    IEnumerator EndDelay()
+    {
+        fadeBG.Play("Fade_Out");
+        yield return new WaitForSeconds(0.5f);
+        ResetState();
+        oneShotSFXAud.Stop();
+        fadeBG.Play("Fade_In");
+        hudPanel.SetActive(false);
+        gmData.ChangeGameState("OutroCutscene");
+        vCamPlayerFollow.SetActive(false);
+        outroTimeline.Play();
     }
     #endregion
 
@@ -565,6 +637,7 @@ public class GameManagerArchivalObject : MonoBehaviour
         {
             RenderSettings.fog = false;
             wateringCanBGAud.Stop();
+            museumBGAud.UnPause();
         }
     }
     #endregion
