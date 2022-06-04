@@ -70,27 +70,26 @@ public class FPSControllerAO : MonoBehaviour
     #endregion
 
     #region Player Crouch
-    [Space, Header("Crouch Variables")]
-    [SerializeField]
-    [Tooltip("Height of the crouch ray shooting upwards")]
-    private Vector3 rayHeight = default;
+    //[Space, Header("Crouch Variables")]
+    //[SerializeField]
+    //[Tooltip("Height of the crouch ray shooting upwards")]
+    //private Vector3 rayHeight = default;
 
-    [SerializeField]
-    [Tooltip("Ray Distance of the crouch")]
-    private float rayRoofDistance = 1f;
+    //[SerializeField]
+    //[Tooltip("Ray Distance of the crouch")]
+    //private float rayRoofDistance = 1f;
 
-    [SerializeField]
-    [Tooltip("Crouch speed of the player")]
-    private float crouchWalkSpeed = 0.5f;
+    //[SerializeField]
+    //[Tooltip("Crouch speed of the player")]
+    //private float crouchWalkSpeed = 0.5f;
 
-    [SerializeField]
-    [Tooltip("How much the CharacterController Collider shrinks when crouched")]
-    private float crouchColShrinkValue = 0.7f; //Initial Value is 0.7f
+    //[SerializeField]
+    //[Tooltip("How much the CharacterController Collider shrinks when crouched")]
+    //private float crouchColShrinkValue = 0.6f;
 
-    [SerializeField]
-    [Tooltip("Where is the center of the CharacterController Collider")]
-    private float crouchColCenterValue = 0.5f; //Initial Value is 0.5f
-
+    //[SerializeField]
+    //[Tooltip("Where is the center of the CharacterController Collider")]
+    //private float crouchColCenterValue = 0.6f;
     #endregion
 
     #region Player Grounding
@@ -99,9 +98,9 @@ public class FPSControllerAO : MonoBehaviour
     [Tooltip("Transform Component for checking the ground")]
     private Transform groundCheck = default;
 
-    [SerializeField]
-    [Tooltip("Transform Component for checking the ground when crouched")]
-    private Transform groundCheckCrouch = default;
+    //[SerializeField]
+    //[Tooltip("Transform Component for checking the ground when crouched")]
+    //private Transform groundCheckCrouch = default;
 
     [SerializeField]
     [Tooltip("Spherecast radius for the ground")]
@@ -136,11 +135,11 @@ public class FPSControllerAO : MonoBehaviour
     #endregion
 
     #region Player Crouch
-    [Header("Crouch Variables")]
-    private bool _isCrouching = default;
-    private float _playerHeight = default;
-    private float _playerCenter = default;
-    private bool _isHittingRoof = default;
+    //[Header("Crouch Variables")]
+    //private bool _isCrouching = default;
+    //private float _playerHeight = default;
+    //private float _playerCenter = default;
+    //private bool _isHittingRoof = default;
     #endregion
 
     #region Player Grounding
@@ -181,8 +180,8 @@ public class FPSControllerAO : MonoBehaviour
         _charControl = GetComponent<CharacterController>();
 
         _currSpeed = playerWalkSpeed;
-        _playerHeight = _charControl.height;
-        _playerCenter = _charControl.center.y;
+        //_playerHeight = _charControl.height;
+        //_playerCenter = _charControl.center.y;
     }
 
     void Update()
@@ -235,15 +234,15 @@ public class FPSControllerAO : MonoBehaviour
     /// </summary>
     void InputChecks()
     {
-        if (Input.GetKey(runKey) && !_isCrouching)
+        if (Input.GetKey(runKey) /*&& !_isCrouching*/)
             _isRunning = true;
         else
             _isRunning = false;
 
-        if (Input.GetKey(crouchKey) || Input.GetKey(crouchAlternateKey) && !_isRunning)
-            _isCrouching = true;
-        else if (!_isHittingRoof)
-            _isCrouching = false;
+        //if (Input.GetKey(crouchKey) || Input.GetKey(crouchAlternateKey) && !_isRunning)
+        //    _isCrouching = true;
+        //else if (!_isHittingRoof)
+        //    _isCrouching = false;
 
         if (Input.GetKeyDown(jumpKey) && canJump)
             PlayerJump();
@@ -254,10 +253,10 @@ public class FPSControllerAO : MonoBehaviour
     /// </summary>
     void GroundCheck()
     {
-        if (!_isCrouching)
+        //if (!_isCrouching)
             _isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        else
-            _isGrounded = Physics.CheckSphere(groundCheckCrouch.position, groundDistance, groundMask);
+        //else
+        //    _isGrounded = Physics.CheckSphere(groundCheckCrouch.position, groundDistance, groundMask);
 
 
         if (_isGrounded && _vel.y < 0)
@@ -276,16 +275,16 @@ public class FPSControllerAO : MonoBehaviour
     /// <summary>
     /// Crouch check so the player doesn't get stuck when they stop crouching;
     /// </summary>
-    void CheckCrouch()
-    {
-        Ray ray = new Ray(transform.position + rayHeight, transform.forward);
+    //void CheckCrouch()
+    //{
+    //    Ray ray = new Ray(transform.position + rayHeight, transform.forward);
 
-        _isHittingRoof = Physics.Raycast(ray.origin, Vector3.up, rayRoofDistance);
-        Debug.DrawRay(ray.origin, Vector3.up * rayRoofDistance, _isHittingRoof ? Color.green : Color.red);
+    //    _isHittingRoof = Physics.Raycast(ray.origin, Vector3.up, rayRoofDistance);
+    //    Debug.DrawRay(ray.origin, Vector3.up * rayRoofDistance, _isHittingRoof ? Color.green : Color.red);
 
-        if (_isHittingRoof)
-            _isCrouching = true;
-    }
+    //    if (_isHittingRoof)
+    //        _isCrouching = true;
+    //}
     #endregion
 
     #region Player Movement
@@ -314,8 +313,8 @@ public class FPSControllerAO : MonoBehaviour
     /// </summary>
     void PlayerCurrStance()
     {
-        float localHeight = _playerHeight;
-        float localCenter = _playerCenter;
+        //float localHeight = _playerHeight;
+        //float localCenter = _playerCenter;
 
         if (_isRunning) // Run
         {
@@ -323,15 +322,15 @@ public class FPSControllerAO : MonoBehaviour
             playerFootStepAnim.speed = 1.5f;
             //Debug.Log("Running");
         }
-        else if (_isCrouching) // Crouch
-        {
-            localHeight = _playerHeight * crouchColShrinkValue;
-            localCenter = _playerCenter / crouchColCenterValue;
-            _currSpeed = crouchWalkSpeed;
-            playerFootStepAnim.speed = 0.8f;
-            //Debug.Log("Crouching");
-            CheckCrouch();
-        }
+        //else if (_isCrouching) // Crouch
+        //{
+        //    localHeight = _playerHeight * crouchColShrinkValue;
+        //    localCenter = _playerCenter / crouchColCenterValue;
+        //    _currSpeed = crouchWalkSpeed;
+        //    playerFootStepAnim.speed = 0.8f;
+        //    //Debug.Log("Crouching");
+        //    CheckCrouch();
+        //}
         else // Walk
         {
             _currSpeed = playerWalkSpeed;
@@ -339,8 +338,8 @@ public class FPSControllerAO : MonoBehaviour
             //Debug.Log("Walking");
         }
 
-        _charControl.height = Mathf.Lerp(_charControl.height, localHeight, 5 * Time.deltaTime);
-        _charControl.center = new Vector3(0, Mathf.Lerp(_charControl.center.y, localCenter, 5 * Time.deltaTime), 0);
+        //_charControl.height = Mathf.Lerp(_charControl.height, localHeight, 5 * Time.deltaTime);
+        //_charControl.center = new Vector3(0, Mathf.Lerp(_charControl.center.y, localCenter, 5 * Time.deltaTime), 0);
     }
 
     /// <summary>
