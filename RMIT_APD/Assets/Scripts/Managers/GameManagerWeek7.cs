@@ -17,6 +17,10 @@ public class GameManagerWeek7 : MonoBehaviour
     #region UI
     [Space, Header("UI")]
     [SerializeField]
+    [Tooltip("Want to disable cursor?")]
+    private bool isCursorDsiabled = default;
+
+    [SerializeField]
     [Tooltip("Pause Buttons")]
     private Button[] pauseButtons = default;
 
@@ -57,7 +61,9 @@ public class GameManagerWeek7 : MonoBehaviour
     void Start()
     {
         StartCoroutine(StartDelay());
-        DisableCursor();
+
+        if (isCursorDsiabled)
+            DisableCursor();
 #if UNITY_WEBGL
         // Disables the Quit button on WebGL;
         pauseButtons[3].interactable = false;
@@ -80,6 +86,7 @@ public class GameManagerWeek7 : MonoBehaviour
         StartCoroutine(MenuDelay());
         _currGameState = GameState.Outro;
     }
+
     void DisableCursor()
     {
         Cursor.visible = false;
