@@ -110,7 +110,7 @@ public class GameManagerWeek4 : MonoBehaviour
         {
             _currGameState = GameState.Paused;
             EnableCursor();
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             hudPanel.SetActive(false);
             pausePanel.SetActive(true);
         }
@@ -118,7 +118,7 @@ public class GameManagerWeek4 : MonoBehaviour
         {
             _currGameState = GameState.Game;
             DisableCursor();
-            Time.timeScale = 1;
+            //Time.timeScale = 1;
             hudPanel.SetActive(true);
             pausePanel.SetActive(false);
         }
