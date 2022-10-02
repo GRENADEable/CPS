@@ -18,10 +18,6 @@ namespace Khatim.PPP
         private GameManagerArtbookData gmData = default;
 
         [SerializeField]
-        [Tooltip("Artbook Datas")]
-        private ArtData[] artData = default;
-
-        [SerializeField]
         [Tooltip("Is Intro fade skipped?")]
         private bool isIntroSkipped = default;
         #endregion
@@ -62,8 +58,19 @@ namespace Khatim.PPP
         private float fadeDelay = default;
         #endregion
 
-        #region Vector3
+        #region Int Events
+        public delegate void SendEventsInt(int index);
+        /// <summary>
+        /// Event sent from ArtbookManager to InfoTab Scripts;
+        /// Sends appropite index to show info;
+        /// </summary>
+        public static event SendEventsInt OnHoverPeekInfo;
 
+        /// <summary>
+        /// Event sent from ArtbookManager to InfoTab Scripts;
+        /// Sends appropite index to hide info;
+        /// </summary>
+        public static event SendEventsInt OnHoverUnPeekInfo;
         #endregion
 
         #endregion
@@ -97,7 +104,7 @@ namespace Khatim.PPP
             StartCoroutine(StartDelay());
 
             for (int i = 0; i < circularButtons.Length; i++)
-                circularButtons[i].transform.DOScale(Random.Range(0.4f, 0.9f), Random.Range(0.3f, 0.6f)).SetLoops(-1, LoopType.Yoyo);
+                circularButtons[i].transform.DOScale(0.8f, 0.7f).SetLoops(-1, LoopType.Yoyo);
         }
 
         void Update()
@@ -124,14 +131,16 @@ namespace Khatim.PPP
             }
         }
 
-        public void OnButtonHoverEnter()
+        public void OnButtonHoverEnter(int buttonIndex)
         {
-            Debug.Log("Button Hover Enter");
+            OnHoverPeekInfo?.Invoke(buttonIndex);
+            //Debug.Log($"Button{buttonIndex} Hover Enter");
         }
 
-        public void OnButtonHoverExit()
+        public void OnButtonHoverExit(int buttonIndex)
         {
-            Debug.Log("Button Hover Exit");
+            OnHoverUnPeekInfo?.Invoke(buttonIndex);
+            //Debug.Log($"Button{buttonIndex} Hover Exit");
         }
         #endregion
 
