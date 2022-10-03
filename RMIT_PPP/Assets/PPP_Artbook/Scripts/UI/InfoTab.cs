@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace Khatim.PPP
 {
@@ -22,10 +23,18 @@ namespace Khatim.PPP
         private int infoIndex = default;
         #endregion
 
-        #region GameObject
+        #region GameObjects
+        [Space, Header("GameObjects")]
         [SerializeField]
-        [Tooltip("Test")]
-        private GameObject test;
+        [Tooltip("Peek Placeholder Image")]
+        private GameObject placeholderImage = default;
+        #endregion
+
+        #region UIs
+        [Space, Header("UIs")]
+        [SerializeField]
+        [Tooltip("Peek Text")]
+        private TextMeshProUGUI peekText = default;
         #endregion
 
         #endregion
@@ -58,7 +67,7 @@ namespace Khatim.PPP
 
         void Start()
         {
-
+            peekText.text = artData.peekText;
         }
 
         void Update()
@@ -70,12 +79,12 @@ namespace Khatim.PPP
         #region My Functions
         void PeekInfo()
         {
-            test.SetActive(true);
+            placeholderImage.SetActive(true);
         }
 
         void UnPeekInfo()
         {
-            test.SetActive(false);
+            placeholderImage.SetActive(false);
         }
 
         void OnClick_ShowInfo()

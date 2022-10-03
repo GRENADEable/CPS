@@ -7,13 +7,8 @@ namespace Khatim.PPP
     [CreateAssetMenu(fileName = "Art_Data", menuName = "Art/ArtData")]
     public class ArtData : ScriptableObject
     {
-        #region Serialized Variables
-        //[SerializeField]
-        //[Tooltip("")]
-        #endregion
-
-        #region Private Variables
-
+        #region Public Variables
+        public string peekText;
         #endregion
 
         #region Unity Callbacks
