@@ -28,6 +28,10 @@ public class GameManagerCelesteAO : MonoBehaviour
     [SerializeField]
     [Tooltip("Fade Background Delay")]
     private float fadeDelay = default;
+
+    [SerializeField]
+    [Tooltip("Response Panel Delay")]
+    private float responsePanelDelay = default;
     #endregion
 
     #region Buttons
@@ -90,7 +94,8 @@ public class GameManagerCelesteAO : MonoBehaviour
     #region My Functions
     public void OnClick_ShowResponse(int responseIndex)
     {
-        responsePanel.SetActive(true);
+        //responsePanel.SetActive(true);
+        responsePanel.transform.DOScale(Vector3.one, responsePanelDelay);
         responseTitleText.text = $"Response Week {responseDatas[responseIndex].responseWeek}";
         responseBackButton.interactable = true;
     }
@@ -98,7 +103,8 @@ public class GameManagerCelesteAO : MonoBehaviour
     public void OnClickResponseBack()
     {
         responseTitleText.text = "";
-        responsePanel.SetActive(false);
+        //responsePanel.SetActive(false);
+        responsePanel.transform.DOScale(Vector3.zero, responsePanelDelay);
         responseBackButton.interactable = false;
     }
     #endregion

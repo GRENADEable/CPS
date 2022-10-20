@@ -1159,6 +1159,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7a9ee47ce5d89a340a8438fc046c3a1a, type: 2}
   responsePanel: {fileID: 1093440997}
   fadeDelay: 0.5
+  responsePanelDelay: 0.2
   responseBackButton: {fileID: 781416588}
   fadeBG: {fileID: 528259124}
   responseTitleText: {fileID: 346334524}
@@ -2268,7 +2269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1093440998
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2278,7 +2279,7 @@ RectTransform:
   m_GameObject: {fileID: 1093440997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 2000187611}
   m_Father: {fileID: 510604902}
