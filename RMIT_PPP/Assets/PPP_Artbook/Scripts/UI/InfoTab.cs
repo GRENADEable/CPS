@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 namespace Khatim.PPP
 {
@@ -25,22 +27,23 @@ namespace Khatim.PPP
 
         #region GameObjects
         [Space, Header("GameObjects")]
+
         [SerializeField]
-        [Tooltip("Peek Placeholder Image")]
-        private GameObject placeholderImage = default;
+        [Tooltip("Vertical Scroll Tab")]
+        private GameObject verticalScrollTab = default;
         #endregion
 
         #region UIs
         [Space, Header("UIs")]
         [SerializeField]
-        [Tooltip("Peek Text")]
-        private TextMeshProUGUI peekText = default;
+        [Tooltip("First Arrow Image")]
+        private Image arrowImg1 = default;
         #endregion
 
         #endregion
 
         #region Private Variables
-
+        private bool _isShowingInfo = default;
         #endregion
 
         #region Unity Callbacks
@@ -67,7 +70,7 @@ namespace Khatim.PPP
 
         void Start()
         {
-            peekText.text = artData.peekText;
+
         }
 
         void Update()
@@ -79,22 +82,26 @@ namespace Khatim.PPP
         #region My Functions
         void PeekInfo()
         {
-            placeholderImage.SetActive(true);
+
         }
 
         void UnPeekInfo()
         {
-            placeholderImage.SetActive(false);
-        }
-
-        void OnClick_ShowInfo()
-        {
 
         }
 
-        void OnClick_HideInfo()
+        public void OnClick_ToggleInfo()
         {
+            _isShowingInfo = !_isShowingInfo;
 
+            if (_isShowingInfo)
+            {
+                arrowImg1.DOFillAmount(1, 0.2f);
+            }
+            else
+            {
+                arrowImg1.DOFillAmount(0, 0f);
+            }
         }
         #endregion
 
