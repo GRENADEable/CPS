@@ -91,7 +91,7 @@ public class GameManagerCelesteAO : MonoBehaviour
     public void OnClick_ShowResponse(int responseIndex)
     {
         responsePanel.transform.DOScale(Vector3.one, responsePanelDelay);
-        responseTitleText.text = $"Response Week {responseDatas[responseIndex].responseWeek}";
+        responseTitleText.text = responseDatas[responseIndex].responseWeek;
         responseVidPlayer.clip = responseDatas[responseIndex].responseVid;
         responseVidPlayer.Play();
         InteractableResponeButtons(false);

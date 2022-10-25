@@ -5,7 +5,7 @@ using UnityEngine.Video;
 public class ResponseData : ScriptableObject
 {
     #region Public Variables
-    public int responseWeek;
+    public string responseWeek;
     public VideoClip responseVid;
     #endregion
 }

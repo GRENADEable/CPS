@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c25b4e54787eefe44ace3b47b7ae7ab7, type: 3}
   m_Name: Response_Wk_7_Data
   m_EditorClassIdentifier: 
-  responseWeek: 7
+  responseWeek: Character
   responseVid: {fileID: 32900000, guid: 3e2e1effd75ecaa4fbb606e4e172fd3f, type: 3}
