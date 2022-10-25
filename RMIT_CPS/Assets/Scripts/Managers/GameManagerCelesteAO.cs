@@ -71,6 +71,10 @@ public class GameManagerCelesteAO : MonoBehaviour
     [SerializeField]
     [Tooltip("Theme Image Componenet")]
     private Image responseThemeImg = default;
+
+    [SerializeField]
+    [Tooltip("Response Raw Image")]
+    private RawImage responseRawImg = default;
     #endregion
 
     #region Texts
@@ -100,11 +104,16 @@ public class GameManagerCelesteAO : MonoBehaviour
     {
         responsePanel.transform.DOScale(Vector3.one, responsePanelDelay);
         responseTitleText.text = responseDatas[responseIndex].responseWeek;
-        responseVidPlayer.clip = responseDatas[responseIndex].responseVid;
         responseThemeImg.sprite = responseDatas[responseIndex].responseThemeSprites;
-        //jukeboxImg.color = responseDatas[responseIndex].jukeboxColor;
-        //jukeboxImg.DOColor(responseDatas[responseIndex].jukeboxColor, 0.5f);
-        responseVidPlayer.Play();
+
+        if (responseDatas[responseIndex].isVideoResponse)
+        {
+            responseVidPlayer.clip = responseDatas[responseIndex].responseVid;
+            responseVidPlayer.Play();
+        }
+        else
+            responseRawImg.texture = responseDatas[responseIndex].responseTex;
+        
         InteractableResponeButtons(false);
         responseBackButton.interactable = true;
     }
@@ -120,6 +129,7 @@ public class GameManagerCelesteAO : MonoBehaviour
         responseVidPlayer.Stop();
         InteractableResponeButtons(true);
         responseBackButton.interactable = false;
+        responseRawImg.texture = responseVidTex;
         responseVidTex.Release();
     }
 

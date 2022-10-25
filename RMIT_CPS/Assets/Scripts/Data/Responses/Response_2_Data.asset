@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Response_2_Data
   m_EditorClassIdentifier: 
   responseWeek: Tinkering
-  responseVid: {fileID: 32900000, guid: ab17e929615885c44adb3b52cd898eb3, type: 3}
+  responseVid: {fileID: 32900000, guid: 09fa5e106c39a0a4abb4526d1aed952f, type: 3}
+  responseTex: {fileID: 0}
   responseThemeSprites: {fileID: 21300000, guid: 74ccd8e14ee09d049a7ea09bcc9e4b29, type: 3}
-  jukeboxColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+  isVideoResponse: 1

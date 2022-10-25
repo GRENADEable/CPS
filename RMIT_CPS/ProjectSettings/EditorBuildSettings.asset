@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Archival_Object/Khatim_Menu_AO.unity
-    guid: 863fd46d03a672c43a119ed42f359df9
-  - enabled: 1
-    path: Assets/Scenes/Archival_Object/Khatim_Main_AO.unity
-    guid: f1467e9bd22e56243a0aa9651e54ef08
+    path: Assets/Scenes/Archival_Object_Celeste/Celeste_Main_AO.unity
+    guid: 7a0944f82b7781e47943383a3f4745fc
   m_configObjects: {}

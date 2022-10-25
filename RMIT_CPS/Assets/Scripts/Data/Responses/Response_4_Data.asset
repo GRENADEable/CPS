@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Response_4_Data
   m_EditorClassIdentifier: 
   responseWeek: Environment
-  responseVid: {fileID: 32900000, guid: 37ed981a99aefea40a484a42c3aadeb7, type: 3}
+  responseVid: {fileID: 32900000, guid: e9a3f7e646895b6429a6b79a3927ae55, type: 3}
+  responseTex: {fileID: 0}
   responseThemeSprites: {fileID: 21300000, guid: 37b2e9853740da94caed519aac433fbc, type: 3}
-  jukeboxColor: {r: 0.62352943, g: 0.62352943, b: 0.62352943, a: 1}
+  isVideoResponse: 1
