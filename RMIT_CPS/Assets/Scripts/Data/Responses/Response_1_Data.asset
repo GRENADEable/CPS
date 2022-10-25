@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c25b4e54787eefe44ace3b47b7ae7ab7, type: 3}
-  m_Name: Response_Wk_1_Data
+  m_Name: Response_1_Data
   m_EditorClassIdentifier: 
   responseWeek: Observation
   responseVid: {fileID: 32900000, guid: 41a66c5b8b585834891a5101de54287f, type: 3}
+  responseThemeSprites: {fileID: 21300000, guid: 426fa7539a10cf8459027678e04affa6, type: 3}
+  jukeboxColor: {r: 0.8, g: 0, b: 0, a: 1}

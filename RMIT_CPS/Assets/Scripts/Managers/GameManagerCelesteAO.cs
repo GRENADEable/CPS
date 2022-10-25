@@ -57,12 +57,20 @@ public class GameManagerCelesteAO : MonoBehaviour
     private Image fadeBG = default;
 
     [SerializeField]
+    [Tooltip("Jukebox Image")]
+    private Image jukeboxImg = default;
+
+    [SerializeField]
     [Tooltip("Response Video RawImage")]
     private RenderTexture responseVidTex = default;
 
     [SerializeField]
     [Tooltip("Response Video Player")]
     private VideoPlayer responseVidPlayer = default;
+
+    [SerializeField]
+    [Tooltip("Theme Image Componenet")]
+    private Image responseThemeImg = default;
     #endregion
 
     #region Texts
@@ -93,6 +101,9 @@ public class GameManagerCelesteAO : MonoBehaviour
         responsePanel.transform.DOScale(Vector3.one, responsePanelDelay);
         responseTitleText.text = responseDatas[responseIndex].responseWeek;
         responseVidPlayer.clip = responseDatas[responseIndex].responseVid;
+        responseThemeImg.sprite = responseDatas[responseIndex].responseThemeSprites;
+        //jukeboxImg.color = responseDatas[responseIndex].jukeboxColor;
+        //jukeboxImg.DOColor(responseDatas[responseIndex].jukeboxColor, 0.5f);
         responseVidPlayer.Play();
         InteractableResponeButtons(false);
         responseBackButton.interactable = true;
