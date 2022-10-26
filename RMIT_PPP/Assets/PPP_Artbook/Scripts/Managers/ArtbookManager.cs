@@ -58,21 +58,6 @@ namespace Khatim.PPP
         private float fadeDelay = default;
         #endregion
 
-        #region Int Events
-        public delegate void SendEventsInt(int index);
-        /// <summary>
-        /// Event sent from ArtbookManager to InfoTab Scripts;
-        /// Sends appropite index to show info;
-        /// </summary>
-        public static event SendEventsInt OnHoverPeekInfo;
-
-        /// <summary>
-        /// Event sent from ArtbookManager to InfoTab Scripts;
-        /// Sends appropite index to hide info;
-        /// </summary>
-        public static event SendEventsInt OnHoverUnPeekInfo;
-        #endregion
-
         #endregion
 
         #region Private Variables
@@ -80,23 +65,6 @@ namespace Khatim.PPP
         #endregion
 
         #region Unity Callbacks
-
-        #region Events
-        void OnEnable()
-        {
-
-        }
-
-        void OnDisable()
-        {
-
-        }
-
-        void OnDestroy()
-        {
-
-        }
-        #endregion
 
         void Start()
         {
@@ -130,18 +98,6 @@ namespace Khatim.PPP
                 _vCamTrackDolly.m_PathPosition = scrollVal * dollyScrollSpeed;
             }
         }
-
-        public void OnButtonHoverEnter(int buttonIndex)
-        {
-            OnHoverPeekInfo?.Invoke(buttonIndex);
-            //Debug.Log($"Button{buttonIndex} Hover Enter");
-        }
-
-        public void OnButtonHoverExit(int buttonIndex)
-        {
-            OnHoverUnPeekInfo?.Invoke(buttonIndex);
-            //Debug.Log($"Button{buttonIndex} Hover Exit");
-        }
         #endregion
 
         #region Coroutines
@@ -166,8 +122,5 @@ namespace Khatim.PPP
         }
         #endregion
 
-        #region Events
-
-        #endregion
     }
 }

@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using DG.Tweening;
+using UnityEditor;
 
 namespace Khatim.PPP
 {
@@ -11,11 +10,18 @@ namespace Khatim.PPP
     {
         #region Serialized Variables
 
-        #region Datas
-        [Space, Header("Datas")]
+        #region GameObjects
+        [Space, Header("GameObjects")]
         [SerializeField]
-        [Tooltip("Artbook Datas")]
-        private ArtData artData = default;
+        [Tooltip("Vertical Panel GameObjects")]
+        private GameObject[] verticalPanels = default;
+        #endregion
+
+        #region Strings
+        [Space, Header("Strings")]
+        [SerializeField]
+        [Tooltip("Strings to change the button text")]
+        private string[] verticalPanelsTexts = default;
         #endregion
 
         #region Ints
@@ -25,118 +31,37 @@ namespace Khatim.PPP
         private int infoIndex = default;
         #endregion
 
-        #region GameObjects
-        [Space, Header("GameObjects")]
-
+        #region UI
+        [Space, Header("UI")]
         [SerializeField]
-        [Tooltip("Vertical Scroll Tab")]
-        private GameObject verticalScrollTab = default;
-        #endregion
-
-        #region UIs
-        [Space, Header("UIs")]
-        [SerializeField]
-        [Tooltip("First Arrow Image")]
-        private Image arrowImg1 = default;
+        [Tooltip("Text where the strings applied to")]
+        private TextMeshProUGUI buttonText = default;
         #endregion
 
         #endregion
 
         #region Private Variables
-        private bool _isShowingInfo = default;
-        #endregion
-
-        #region Unity Callbacks
-
-        #region Events
-        void OnEnable()
-        {
-            ArtbookManager.OnHoverPeekInfo += OnHoverPeekInfoEventReceived;
-            ArtbookManager.OnHoverUnPeekInfo += OnHoverUnPeekInfoEventReceived;
-        }
-
-        void OnDisable()
-        {
-            ArtbookManager.OnHoverPeekInfo -= OnHoverPeekInfoEventReceived;
-            ArtbookManager.OnHoverUnPeekInfo -= OnHoverUnPeekInfoEventReceived;
-        }
-
-        void OnDestroy()
-        {
-            ArtbookManager.OnHoverPeekInfo -= OnHoverPeekInfoEventReceived;
-            ArtbookManager.OnHoverUnPeekInfo -= OnHoverUnPeekInfoEventReceived;
-        }
-        #endregion
-
-        void Start()
-        {
-
-        }
-
-        void Update()
-        {
-
-        }
+        private int _currPanelIndex = default;
         #endregion
 
         #region My Functions
-        void PeekInfo()
-        {
-
-        }
-
-        void UnPeekInfo()
-        {
-
-        }
-
+        /// <summary>
+        /// Toggles between the Info Panels;
+        /// </summary>
         public void OnClick_ToggleInfo()
         {
-            _isShowingInfo = !_isShowingInfo;
+            for (int i = 0; i < verticalPanels.Length; i++)
+                verticalPanels[i].SetActive(false);
 
-            if (_isShowingInfo)
-            {
-                arrowImg1.DOFillAmount(1, 0.2f);
-            }
-            else
-            {
-                arrowImg1.DOFillAmount(0, 0f);
-            }
-        }
-        #endregion
+            verticalPanels[_currPanelIndex].SetActive(true);
+            buttonText.text = verticalPanelsTexts[_currPanelIndex];
 
-        #region Coroutines
+            _currPanelIndex++;
 
-        #endregion
-
-        #region Events
-        /// <summary>
-        /// Subbed to event from ArtbookManager Script;
-        /// Shows info according to the index;
-        /// </summary>
-        /// <param name="index"> Index received should be the same as the infoIndex for the right information; </param>
-        void OnHoverPeekInfoEventReceived(int index)
-        {
-            if (index == infoIndex)
-            {
-                PeekInfo();
-                //Debug.Log($"Showing Tab for {index}");
-            }
+            if (_currPanelIndex == verticalPanels.Length)
+                _currPanelIndex = 0;
         }
 
-        /// <summary>
-        /// Subbed to event from ArtbookManager Script;
-        /// Hides info according to the index;
-        /// </summary>
-        /// <param name="index"> Index received should be the same as the infoIndex for the right information; </param>
-        void OnHoverUnPeekInfoEventReceived(int index)
-        {
-            if (index == infoIndex)
-            {
-                UnPeekInfo();
-                //Debug.Log($"Hiding Tab for {index}");
-            }
-        }
         #endregion
     }
 }
