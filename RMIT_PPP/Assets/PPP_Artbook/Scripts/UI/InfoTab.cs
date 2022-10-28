@@ -24,13 +24,6 @@ namespace Khatim.PPP
         private string[] verticalPanelsTexts = default;
         #endregion
 
-        #region Ints
-        [Space, Header("Ints")]
-        [SerializeField]
-        [Tooltip("Index to show what info")]
-        private int infoIndex = default;
-        #endregion
-
         #region UI
         [Space, Header("UI")]
         [SerializeField]
@@ -61,7 +54,6 @@ namespace Khatim.PPP
             if (_currPanelIndex == verticalPanels.Length)
                 _currPanelIndex = 0;
         }
-
         #endregion
     }
 }
