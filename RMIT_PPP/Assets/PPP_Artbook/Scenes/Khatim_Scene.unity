@@ -2236,7 +2236,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &141200760
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11464,9 +11464,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74041e833056f0c4ca0a767222d71c42, type: 2}
   - {fileID: 11400000, guid: 37dcebb9538a7c24eb5803a3158de971, type: 2}
   - {fileID: 11400000, guid: 6f2e58b47c637324e98297bbf3d6e6c5, type: 2}
-  isIntroSkipped: 1
+  isIntroSkipped: 0
   vCamDolly: {fileID: 1182481066}
   pausePanel: {fileID: 8197464608962694568}
+  quitButton: {fileID: 141200759}
   timelineScrollRect: {fileID: 120697981}
   circularButtons:
   - {fileID: 537096304}
@@ -11485,6 +11486,7 @@ MonoBehaviour:
   - {fileID: 8197464608779098586}
   - {fileID: 8197464608585049792}
   - {fileID: 8197464608079251461}
+  - {fileID: 141200761}
   fadeBG: {fileID: 1336279924}
   dollyScrollSpeed: 10
   fadeDelay: 3.5

@@ -35,12 +35,19 @@ namespace Khatim.PPP
         private CinemachineVirtualCamera vCamDolly;
         #endregion
 
-        #region UIs
-        [Space, Header("UIs")]
+        #region GameObjects
+        [Space, Header("GameObjects")]
         [SerializeField]
         [Tooltip("Pause Panel")]
         private GameObject pausePanel = default;
 
+        [SerializeField]
+        [Tooltip("Quit Button")]
+        private GameObject quitButton = default;
+        #endregion
+
+        #region UIs
+        [Space, Header("UIs")]
         [SerializeField]
         [Tooltip("Timeline Horizontal Scrollbar")]
         private ScrollRect timelineScrollRect = default;
@@ -94,6 +101,12 @@ namespace Khatim.PPP
 
         void Start()
         {
+#if UNITY_WEBGL
+            quitButton.SetActive(false);
+#else
+            quitButton.SetActive(true);
+#endif
+
             _vCamTrackDolly = vCamDolly.GetCinemachineComponent<CinemachineTrackedDolly>();
             StartCoroutine(StartDelay());
 
@@ -101,14 +114,6 @@ namespace Khatim.PPP
                 circularButtons[i].transform.DOScale(0.8f, 0.7f).SetLoops(-1, LoopType.Yoyo);
 
             SetProductionTimelineValues();
-        }
-
-        void Update()
-        {
-            if (gmData.currState == GameManagerArtbookData.GameState.Game)
-            {
-
-            }
         }
         #endregion
 
