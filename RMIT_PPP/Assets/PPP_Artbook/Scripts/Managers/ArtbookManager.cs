@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Cinemachine;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.InputSystem;
 
 namespace Khatim.PPP
 {
@@ -37,6 +38,10 @@ namespace Khatim.PPP
         #region UIs
         [Space, Header("UIs")]
         [SerializeField]
+        [Tooltip("Pause Panel")]
+        private GameObject pausePanel = default;
+
+        [SerializeField]
         [Tooltip("Timeline Horizontal Scrollbar")]
         private ScrollRect timelineScrollRect = default;
 
@@ -55,6 +60,10 @@ namespace Khatim.PPP
         [SerializeField]
         [Tooltip("Production Dates")]
         private TextMeshProUGUI productionDateText = default;
+
+        [Tooltip("Menu Button in an Array that will be used to disable them when clicking on other Buttons")]
+        [SerializeField]
+        private Button[] menuButtons;
         #endregion
 
         #region Animators
@@ -140,6 +149,50 @@ namespace Khatim.PPP
             productionImg.sprite = productionDatas[0].productionImg;
             productionDateText.text = productionDatas[0].productionDate;
         }
+
+        #region Buttons
+        /// <summary>
+        /// Function tied with Resume_Button Button;
+        /// Resumes the Game;
+        /// </summary>
+        public void OnClick_Resume()
+        {
+            if (gmData.currState == GameManagerArtbookData.GameState.Paused)
+                gmData.ChangeGameState("Game");
+
+            pausePanel.SetActive(false);
+            gmData.TogglePause(false);
+        }
+
+        /// <summary>
+        /// Function tied with Restart_Button Button;
+        /// Restarts the game with a delay;
+        /// </summary>
+        public void OnClick_Restart() => StartCoroutine(RestartDelay());
+
+        /// <summary>
+        /// Button tied with Menu_Button;
+        /// Goes to the Menu with a delay;
+        /// </summary>
+        public void OnClick_Menu() => StartCoroutine(MenuDelay());
+
+        /// <summary>
+        /// Button tied with Quit_Button;
+        /// Quits the Game
+        /// </summary>
+        public void OnClick_Quit() => StartCoroutine(QuitGameDelay());
+
+        /// <summary>
+        /// Tied to the UI Buttons;
+        /// All the buttons added in the Array gets disabled;
+        /// </summary>
+        public void OnClick_DisableButtons()
+        {
+            for (int i = 0; i < menuButtons.Length; i++)
+                menuButtons[i].interactable = false;
+        }
+        #endregion
+
         #endregion
 
         #region Coroutines
@@ -166,6 +219,57 @@ namespace Khatim.PPP
                 fadeBG.Play("Intro_Fade_In");
             }
         }
+
+        #region Buttons
+        /// <summary>
+        /// Restarts the game with a Delay;
+        /// </summary>
+        /// <returns> Float Delay; </returns>
+        IEnumerator RestartDelay()
+        {
+            gmData.TogglePause(false);
+            fadeBG.Play("Fade_Out");
+            yield return new WaitForSeconds(0.5f);
+            gmData.ChangeLevel(Application.loadedLevel);
+        }
+
+        /// <summary>
+        /// Goes to Menu with a Delay;
+        /// </summary>
+        /// <returns> Float Delay; </returns>
+        IEnumerator MenuDelay()
+        {
+            gmData.TogglePause(false);
+            fadeBG.Play("Fade_Out");
+            yield return new WaitForSeconds(0.5f);
+            gmData.ChangeLevel(0);
+        }
+
+        /// <summary>
+        /// Quits the game with a Delay;
+        /// </summary>
+        /// <returns> Float Delay </returns>
+        IEnumerator QuitGameDelay()
+        {
+            gmData.TogglePause(false);
+            fadeBG.Play("Fade_Out");
+            yield return new WaitForSeconds(0.5f);
+            gmData.QuitGame();
+        }
+        #endregion
+
+        #endregion
+
+        #region Events
+        //public void OnPlayerPause(InputAction.CallbackContext context)
+        //{
+        //    if (gmData.currState != GameManagerArtbookData.GameState.Paused &&
+        //        gmData.currState != GameManagerArtbookData.GameState.Intro)
+        //    {
+        //        if (context.started)
+        //            pausePanel.SetActive(true);
+        //    }
+        //}
         #endregion
 
     }
