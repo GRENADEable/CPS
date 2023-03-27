@@ -7,8 +7,8 @@ TagManager:
   - Item_Drop_Pos
   - Item_Drop_Parent
   - Examine_Pos
-  - Flashlight
   - Death
+  - Shotgun
   layers:
   - Default
   - TransparentFX
@@ -24,11 +24,11 @@ TagManager:
   - 
   - 
   - Ground
-  - PropLayer
-  - ExamineLayer
-  - InspectionLayer
-  - KeyLayer
-  - DoorLayer
+  - GunLayer
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
