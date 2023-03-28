@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 256417782991588221}
   - component: {fileID: 7637192148619892941}
   m_Layer: 0
-  m_Name: SFX_Aud
+  m_Name: SFX_Gun_Aud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -428,7 +428,6 @@ GameObject:
   - component: {fileID: 7733886534635547794}
   - component: {fileID: 7733886534635547795}
   - component: {fileID: 8298911156518017913}
-  - component: {fileID: 5892698905700742563}
   - component: {fileID: 2749195899177297352}
   m_Layer: 0
   m_Name: FPS_Player_Basic_Week_4
@@ -497,21 +496,6 @@ MonoBehaviour:
     m_Bits: 8192
   canJump: 1
   jumpPower: 2.5
---- !u!114 &5892698905700742563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7733886534635547793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e666fbcdc8b9b04ebe697a98aa69d4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zoomKey: 324
-  zoomFovVal: 25
-  lerpTime: 10
 --- !u!114 &2749195899177297352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,10 +509,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayDistance: 3
+  rayDistanceSiren: 6
   shotgunLayer:
     serializedVersion: 2
     m_Bits: 16384
   shotgunObj: {fileID: 6896204617574880950}
+  shotgunSFXAud: {fileID: 7637192148619892941}
+  shotgunSFX:
+  - {fileID: 8300000, guid: f5a7686df09785147b31700bb2ac203d, type: 3}
+  shotgunAnim: {fileID: 495581710561040131}
 --- !u!1 &7733886534789767450
 GameObject:
   m_ObjectHideFlags: 0

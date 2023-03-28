@@ -8,7 +8,7 @@ TagManager:
   - Item_Drop_Parent
   - Examine_Pos
   - Death
-  - Shotgun
+  - Siren
   layers:
   - Default
   - TransparentFX

@@ -35,36 +35,30 @@ public class GameManagerWeek4 : MonoBehaviour
     [SerializeField]
     [Tooltip("Fade Image Animation Component")]
     private Animator fadeBG = default;
+    #endregion
 
+    #region Audio
+    [Space, Header("Audio")]
     [SerializeField]
-    [Tooltip("Vid player on the Car")]
-    private VideoPlayer vidPly = default;
+    [Tooltip("Siren Audio Source")]
+    private AudioSource sirenAud = default;
     #endregion
 
+    #region Floats
+    [Space, Header("Floats")]
+    [SerializeField]
+    [Tooltip("After how many seconds to play the siren audio?")]
+    private float sirenDelay = 5f;
     #endregion
 
-    #region Private Variables
     #endregion
 
     #region Unity Callbacks
 
-    #region Events
-    void OnEnable()
-    {
-    }
-
-    void OnDisable()
-    {
-    }
-
-    void OnDestroy()
-    {
-    }
-    #endregion
-
     void Start()
     {
         StartCoroutine(StartDelay());
+        StartCoroutine(StartSirenDelay());
 
         if (isCursorDsiabled)
             DisableCursor();
@@ -85,10 +79,6 @@ public class GameManagerWeek4 : MonoBehaviour
     #endregion
 
     #region My Functions
-    public void OnVidPlay() => vidPly.Play();
-
-    public void OnVidStop() => vidPly.Stop();
-
     void DisableCursor()
     {
         Cursor.visible = false;
@@ -217,6 +207,14 @@ public class GameManagerWeek4 : MonoBehaviour
         _currGameState = GameState.Outro;
         yield return new WaitForSeconds(0.5f);
         Application.Quit();
+    }
+    #endregion
+
+    #region Game
+    IEnumerator StartSirenDelay()
+    {
+        yield return new WaitForSeconds(sirenDelay);
+        sirenAud.Play();
     }
     #endregion
 
