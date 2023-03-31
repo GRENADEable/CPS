@@ -3200,7 +3200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4056664819875809487, guid: fc63f716960858b4e908d1ee1fb2fc0e, type: 3}
       propertyPath: m_Name
-      value: Lego_Man
+      value: Lego_Man_Wk_4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc63f716960858b4e908d1ee1fb2fc0e, type: 3}
