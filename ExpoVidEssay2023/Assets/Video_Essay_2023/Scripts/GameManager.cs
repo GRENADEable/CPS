@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     #region Serialized Variables
-    //[SerializeField]
-    //[Tooltip("")]
+    [SerializeField]
+    [Tooltip("Fade Background Image")]
+    private Image fadeBG = default;
     #endregion
 
     #region Private Variables
@@ -36,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
+        fadeBG.DOFade(0, 0.5f);
     }
 
     void Update()
