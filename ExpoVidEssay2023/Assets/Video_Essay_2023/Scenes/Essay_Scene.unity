@@ -181,7 +181,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 952376453}
   m_Father: {fileID: 1572997295}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -299,7 +300,84 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d4b351444f3fe84da7c075ba9fb55b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vidEssayData:
+  - {fileID: 11400000, guid: 9d4ce82b734509e4d821822384eb090d, type: 2}
+  - {fileID: 11400000, guid: ac709cfb52fc1a94880872144f803a52, type: 2}
+  - {fileID: 11400000, guid: 6d5b8c59cf150d7429574265d87c8e1d, type: 2}
+  - {fileID: 11400000, guid: c05bce358f6530a4089dc122d25cdc22, type: 2}
+  - {fileID: 11400000, guid: c11e504f196f7a34fbe571fe07a76861, type: 2}
+  - {fileID: 11400000, guid: 23da0f59404b5d44fb3faaaefbd5f7e5, type: 2}
+  - {fileID: 11400000, guid: a2cc9d6a389b6774c8249ca53653cb8a, type: 2}
+  - {fileID: 11400000, guid: 5654616a7bcfffd45a7a2ba0f1c6e0c1, type: 2}
+  - {fileID: 11400000, guid: 6f29481e588be6944824c13f40eed4c6, type: 2}
+  - {fileID: 11400000, guid: c14ec94831dbed0459165bf290d3d831, type: 2}
+  - {fileID: 11400000, guid: a4ba07f9302aed446a3b77435544630c, type: 2}
+  - {fileID: 11400000, guid: 6ff78827ff66513499bdc9c965cab4b1, type: 2}
+  - {fileID: 11400000, guid: dd75a4e7beb74b64bb3cc47ec5524bf7, type: 2}
+  vidEssayButtonPrefab: {fileID: 1643028056012226086, guid: 6776e6f5a25c54d43b33136f022f1ce7, type: 3}
+  vidEssyButtonSpawnPos: {fileID: 952376453}
+  vidPlayer: {fileID: 7139353867448274678}
   fadeBG: {fileID: 1092072631}
+--- !u!1 &952376452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 952376453}
+  - component: {fileID: 952376454}
+  m_Layer: 5
+  m_Name: Essay_Library_Group_Layout
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &952376453
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952376452}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 510111722}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 479.99, y: 0}
+  m_SizeDelta: {x: 960.02, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &952376454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952376452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 300, y: 168}
+  m_Spacing: {x: 20, y: 50}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,7 +612,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -907,7 +985,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7139353867448274682}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: e3f8e5a7fec433c41889f2cfa13d2103, type: 3}
+  m_VideoClip: {fileID: 0}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -1001,7 +1079,7 @@ GameObject:
   - component: {fileID: 7139353867448274680}
   - component: {fileID: 7139353867448274678}
   m_Layer: 0
-  m_Name: Essay_Raw_Image
+  m_Name: Essay_Raw_Image_&_Vid_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
