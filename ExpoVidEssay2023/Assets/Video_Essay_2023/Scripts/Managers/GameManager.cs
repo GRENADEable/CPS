@@ -5,15 +5,17 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
     #region Serialized Variables
     [Space, Header("Datas")]
     [SerializeField]
-    [Tooltip("")]
+    [Tooltip("Scrtipable Objects for the Video Essays")]
     private VidEssayData[] vidEssayData = default;
 
+    [Space, Header("UI")]
     [Space, Header("Essay Buttons")]
     [SerializeField]
     [Tooltip("Prefab Button of the Video Essay")]
@@ -28,12 +30,24 @@ public class GameManager : MonoBehaviour
     private VideoPlayer vidPlayer;
 
     [SerializeField]
+    [Tooltip("Render Texture where the Video will be played")]
+    private RenderTexture vidRendTex = default;
+
+    [SerializeField]
     [Tooltip("Fade Background Image")]
     private Image fadeBG = default;
+
+    [Space, Header("GameObjects")]
+    [SerializeField]
+    [Tooltip("Essay Library Video Panel GameObject")]
+    private GameObject vidEssayLibraryPanel = default;
+
+    [SerializeField]
+    [Tooltip("Essay Video Canvas GameObject")]
+    private GameObject vidEssayVideoCanvas = default;
     #endregion
 
     #region Private Variables
-
     #endregion
 
     #region Unity Callbacks
@@ -42,16 +56,22 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         VidEssayButton.OnVidButtonClick += OnVidButtonClickEventReceived;
+
+        VideoManagerEdited.OnVidClose += OnVidCloseEventReceived;
     }
 
     void OnDisable()
     {
         VidEssayButton.OnVidButtonClick -= OnVidButtonClickEventReceived;
+
+        VideoManagerEdited.OnVidClose -= OnVidCloseEventReceived;
     }
 
     void OnDestroy()
     {
         VidEssayButton.OnVidButtonClick -= OnVidButtonClickEventReceived;
+
+        VideoManagerEdited.OnVidClose -= OnVidCloseEventReceived;
     }
     #endregion
 
@@ -63,7 +83,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
+        if (Input.GetKeyUp(KeyCode.Escape))
+            CloseVidPlayer();
     }
     #endregion
 
@@ -86,6 +107,17 @@ public class GameManager : MonoBehaviour
             essayIndex++;
         }
     }
+
+    /// <summary>
+    /// Closes Video Player;
+    /// </summary>
+    void CloseVidPlayer()
+    {
+        vidEssayLibraryPanel.SetActive(true);
+        vidEssayVideoCanvas.SetActive(false);
+        vidPlayer.Stop();
+        vidRendTex.Release();
+    }
     #endregion
 
     #region Coroutines
@@ -93,9 +125,28 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Events
+    /// <summary>
+    /// Subbed to OnVidCloseEvent from VideoGameManagerEdited Script;
+    /// </summary>
+    public void OnVidCloseEventReceived()
+    {
+        CloseVidPlayer();
+    }
+
+    /// <summary>
+    /// Subbed to event from VidEssayButton Script;
+    /// Updates the current Video to play from the Index;
+    /// Switches Panel and plays Video
+    /// </summary>
+    /// <param name="vidEssayIndex"> Index from the Essay Panel Button; </param>
     void OnVidButtonClickEventReceived(int vidEssayIndex)
     {
         vidPlayer.clip = vidEssayData[vidEssayIndex].vidEssayClip;
+
+        vidEssayLibraryPanel.SetActive(false);
+        vidEssayVideoCanvas.SetActive(true);
+        vidPlayer.Play();
+        vidRendTex.Release();
     }
     #endregion
 }
