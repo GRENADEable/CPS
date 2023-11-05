@@ -15,3 +15,12 @@ MonoBehaviour:
   vidEssayClip: {fileID: 32900000, guid: 6a1ad1a7c6c0778429038a007f7fa3b3, type: 3}
   vidEssayThumbnail: {fileID: 21300000, guid: 3014924c8bed4944087b53ac5285cd49, type: 3}
   vidEssayName: Yuxan Hu & Haowen Xue
+  vidEssayTitle: Enhancing the range of expressiveness in 2D avatars facial capture
+    animation for game live streaming
+  vidEssayDescription: This research proposes a highly interactive and feasible model
+    solution aimed at assisting Virtual YouTubers in enhancing the emotional quality
+    of their avatars in a cost-effective manner. This solution is distilled into
+    an easily comprehensible framework. At the core of this research is a method
+    to enhance the expressiveness of 2D avatars. research leverages the capabilities
+    of Live2D Cubism and VTube Studio to create avatars reflecting the human soul,
+    capable of displaying a symphony of emotions.

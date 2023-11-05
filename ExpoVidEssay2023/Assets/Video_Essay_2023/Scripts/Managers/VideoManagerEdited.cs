@@ -2,17 +2,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Video;
 using UnityEngine.UI;
-using UnityEngine.Events;
+using TMPro;
 
 public class VideoManagerEdited : MonoBehaviour, IDragHandler, IPointerDownHandler
 {
     #region Serialized Variables
-    [Space, Header("Video")]
+
+    #region UIs
+    [Space, Header("UIs")]
     [SerializeField]
     [Tooltip("Video Player for playing the Video Essays")]
     private VideoPlayer vidPlayer;
 
-    [Space, Header("UI")]
     [SerializeField]
     [Tooltip("Image Component for the progress bar")]
     private Image vidProgressImg;
@@ -24,13 +25,17 @@ public class VideoManagerEdited : MonoBehaviour, IDragHandler, IPointerDownHandl
     [SerializeField]
     [Tooltip("Video Button Image Sprites")]
     private Sprite[] buttonImgSprites = default;
+    #endregion
 
+    #region Events
     public delegate void SendEvents();
     /// <summary>
     /// Event sent from VideoManagerEdited to GameManager Scripts;
     /// Closes the Vdieo Player on Click;
     /// </summary>
     public static event SendEvents OnVidClose;
+    #endregion
+
     #endregion
 
     #region Private Variables

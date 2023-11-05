@@ -15,3 +15,16 @@ MonoBehaviour:
   vidEssayClip: {fileID: 32900000, guid: acd6d683b0b06ba4fbcab748f04fb52b, type: 3}
   vidEssayThumbnail: {fileID: 21300000, guid: 9abe830bc3803194b860d8c8fbf25bfc, type: 3}
   vidEssayName: Izac Ho
+  vidEssayTitle: Constraint-led Approach in Designing Extended Reality Experiences
+    for Enhanced Immersive Empathy
+  vidEssayDescription: 'As extended reality (XR) technology advances, prevailing
+    XR experiences often prioritize maximizing player control and agency through
+    expanded freedom. This essay diverges from the conventional approach by examining
+    an artefact of the author "Drift", which employs constraints in player control
+    to foster immersive empathy. Our comprehension of the interplay between constraints
+    in play and immersive empathy is still emerging. This study seeks to unpack some
+    insights related to the following themes: Constraints as a narrative of the play,
+    and the relationship between constraints and empathy within XR. Through this
+    exploration, the paper proposes a method for designing XR experiences with constraints,
+    offering a foundation to inform future practices centred around empathy-driven
+    design.'

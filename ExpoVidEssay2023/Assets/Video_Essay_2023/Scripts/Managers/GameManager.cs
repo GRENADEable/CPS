@@ -10,12 +10,16 @@ using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
     #region Serialized Variables
+
+    #region Datas
     [Space, Header("Datas")]
     [SerializeField]
     [Tooltip("Scrtipable Objects for the Video Essays")]
     private VidEssayData[] vidEssayData = default;
+    #endregion
 
-    [Space, Header("UI")]
+    #region UIs
+    [Space, Header("UIs")]
     [Space, Header("Essay Buttons")]
     [SerializeField]
     [Tooltip("Prefab Button of the Video Essay")]
@@ -33,10 +37,20 @@ public class GameManager : MonoBehaviour
     [Tooltip("Render Texture where the Video will be played")]
     private RenderTexture vidRendTex = default;
 
-    [SerializeField]
-    [Tooltip("Fade Background Image")]
-    private Image fadeBG = default;
+    //[SerializeField]
+    //[Tooltip("Fade Background Image")]
+    //private Image fadeBG = default;
 
+    [SerializeField]
+    [Tooltip("Video Essay Title Text")]
+    private TextMeshProUGUI vidEssayTitleText = default;
+
+    //[SerializeField]
+    //[Tooltip("Video Essay Description Text")]
+    //private TextMeshProUGUI vidEssayDescriptionText = default;
+    #endregion
+
+    #region GameObjects
     [Space, Header("GameObjects")]
     [SerializeField]
     [Tooltip("Essay Library Video Panel GameObject")]
@@ -45,6 +59,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     [Tooltip("Essay Video Canvas GameObject")]
     private GameObject vidEssayVideoCanvas = default;
+    #endregion
+
     #endregion
 
     #region Private Variables
@@ -56,6 +72,8 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         VidEssayButton.OnVidButtonClick += OnVidButtonClickEventReceived;
+        //VidEssayButton.OnVidButtonClickTitleText += OnVidButtonClickTitleTextEventReceived;
+        //VidEssayButton.OnVidButtonClickDescriptionText += OnVidButtonClickDescriptionTextEventReceived;
 
         VideoManagerEdited.OnVidClose += OnVidCloseEventReceived;
     }
@@ -63,6 +81,8 @@ public class GameManager : MonoBehaviour
     void OnDisable()
     {
         VidEssayButton.OnVidButtonClick -= OnVidButtonClickEventReceived;
+        //VidEssayButton.OnVidButtonClickTitleText -= OnVidButtonClickTitleTextEventReceived;
+        //VidEssayButton.OnVidButtonClickDescriptionText -= OnVidButtonClickDescriptionTextEventReceived;
 
         VideoManagerEdited.OnVidClose -= OnVidCloseEventReceived;
     }
@@ -70,6 +90,8 @@ public class GameManager : MonoBehaviour
     void OnDestroy()
     {
         VidEssayButton.OnVidButtonClick -= OnVidButtonClickEventReceived;
+        //VidEssayButton.OnVidButtonClickTitleText -= OnVidButtonClickTitleTextEventReceived;
+        //VidEssayButton.OnVidButtonClickDescriptionText -= OnVidButtonClickDescriptionTextEventReceived;
 
         VideoManagerEdited.OnVidClose -= OnVidCloseEventReceived;
     }
@@ -77,7 +99,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        fadeBG.DOFade(0, 0.5f);
+        //fadeBG.DOFade(0, 0.5f);
+        vidEssayTitleText.DOFade(1, 2f);
         IntialiseButtons();
     }
 
@@ -102,7 +125,7 @@ public class GameManager : MonoBehaviour
             essayObj.name = $"Essay_Button_{vidEssayData[i].vidEssayName}";
 
             if (essayObj.GetComponent<VidEssayButton>() != null)
-                essayObj.GetComponent<VidEssayButton>().OnIntialiseButton(vidEssayData[i].vidEssayName, vidEssayData[i].vidEssayThumbnail, essayIndex);
+                essayObj.GetComponent<VidEssayButton>().OnIntialiseButton(vidEssayData[i], essayIndex);
 
             essayIndex++;
         }
@@ -148,5 +171,15 @@ public class GameManager : MonoBehaviour
         vidPlayer.Play();
         vidRendTex.Release();
     }
+
+    //void OnVidButtonClickTitleTextEventReceived(string vidEssayTitle)
+    //{
+
+    //}
+
+    //void OnVidButtonClickDescriptionTextEventReceived(string vidEssayTitle)
+    //{
+
+    //}
     #endregion
 }

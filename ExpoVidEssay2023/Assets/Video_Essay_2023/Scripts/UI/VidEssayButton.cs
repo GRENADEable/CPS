@@ -8,6 +8,8 @@ using DG.Tweening;
 public class VidEssayButton : MonoBehaviour
 {
     #region Serialized Variables
+
+    #region Events Int
     public delegate void SendEventsInt(int id);
     /// <summary>
     /// Sends Event from VidEssayButton To GameManager Script;
@@ -16,46 +18,99 @@ public class VidEssayButton : MonoBehaviour
     public static event SendEventsInt OnVidButtonClick;
     #endregion
 
+    #region Event String
+    //public delegate void SendEventString(string text);
+    //public static event SendEventString OnVidButtonClickTitleText;
+    //public static event SendEventString OnVidButtonClickDescriptionText;
+    #endregion
+
+    #endregion
+
     #region Private Variables
-    private TextMeshProUGUI _buttonEssayText = default;
+    private TextMeshProUGUI _buttonEssayNameText = default;
+    [TextArea(2, 5)][SerializeField] private string _vidEssayTitleText = default;
+    [TextArea(30, 5)][SerializeField] private string _vidEssayDescriptionText = default;
     private Image _buttonEssayImg = default;
     [SerializeField] private int _essayIndex = default;
+    private VidEssayData _vidEssayData = default;
     #endregion
 
     #region Unity Callbacks
     void Awake()
     {
-        _buttonEssayText = GetComponentInChildren<TextMeshProUGUI>();
+
+    }
+
+    void Start()
+    {
+        _buttonEssayNameText = GetComponentInChildren<TextMeshProUGUI>();
         _buttonEssayImg = GetComponent<Image>();
+
+        IntialiseButton();
     }
     #endregion
 
     #region My Functions
-    /// <summary>
-    /// Button intialisd from GameManger;
-    /// Sets up the UI of the Button when the Buttons spawn from the ScriptableObject Datas;
-    /// </summary>
-    /// <param name="essayNameText"> The Name of the person in the video essay; </param>
-    /// <param name="essaySprite"> The thumbnail of the video essay; </param>
-    /// <param name="essayIndex"> The Index number of the video essay; </param>
-    public void OnIntialiseButton(string essayNameText, Sprite essaySprite, int essayIndex)
+    ///// <summary>
+    ///// Button intialisd from GameManger;
+    ///// Sets up the UI of the Button when the Buttons spawn from the ScriptableObject Datas;
+    ///// </summary>
+    /// <param name="essayData"> Video Essay Scrtipable Object set from the GameManager Script on Runtime; </param>
+    /// <param name="essayIndex"> Video Essay Index set from the GameManager Script on Runtime; </param>
+    public void OnIntialiseButton(VidEssayData essayData, int essayIndex)
     {
-        _buttonEssayText.text = essayNameText;
-        _buttonEssayImg.sprite = essaySprite;
+        _vidEssayData = essayData;
         _essayIndex = essayIndex;
     }
 
     /// <summary>
-    /// Tied to Essay_Button;
-    /// Updates the UI of the Game according to the current button pressed;
+    /// Sets the text of the buttons on Runtime;
     /// </summary>
-    public void OnClick_VidEssayButton()
+    void IntialiseButton()
     {
-        OnVidButtonClick?.Invoke(_essayIndex);
+        _buttonEssayNameText.text = _vidEssayData.vidEssayName;
+        _buttonEssayImg.sprite = _vidEssayData.vidEssayThumbnail;
+
+        _vidEssayTitleText = _vidEssayData.vidEssayTitle;
+        _vidEssayDescriptionText = _vidEssayData.vidEssayDescription;
+
+        _buttonEssayImg.transform.DOPunchScale(Vector3.one, 1f);
     }
 
-    //public void OnHover_MouseEnter() => _buttonEssayText.DOFade(0, 0.2f);
+    /// <summary>
+    /// Tied to Essay_Button_V1;
+    /// Updates the UI of the Game according to the current button pressed;
+    /// </summary>
+    public void OnClick_VidEssayButtonV1() => OnVidButtonClick?.Invoke(_essayIndex);
 
-    //public void OnHover_MouseExit() => _buttonEssayText.DOFade(1, 0.2f);
+    /// <summary>
+    /// Tied to Essay_Button_V2;
+    /// Updates the UI of the Game according to the current button pressed;
+    /// </summary>
+    public void OnClick_VidEssayButtonV2()
+    {
+        OnHover_MouseExit();
+        OnVidButtonClick?.Invoke(_essayIndex);
+        //OnVidButtonClickTitleText?.Invoke(_vidEssayTitleText);
+        //OnVidButtonClickDescriptionText?.Invoke(_vidEssayDescriptionText);
+    }
+
+    /// <summary>
+    /// Tied to Event Trigger Pointer Enter on Essay_Button_V2;
+    /// Hides the name Text and reaveals the info Text;
+    /// </summary>
+    public void OnHover_MouseEnter()
+    {
+        _buttonEssayNameText.DOFade(0, 0.2f);
+    }
+
+    /// <summary>
+    /// Tied to Event Trigger Pointer Enter on Essay_Button_V2;
+    /// Shows the name Text and hides the info Text;
+    /// </summary>
+    public void OnHover_MouseExit()
+    {
+        _buttonEssayNameText.DOFade(1, 0.2f);
+    }
     #endregion
 }

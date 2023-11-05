@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb1725f876937e4a99b99a8488962c5, type: 3}
+  m_Name: Vid_Essay_Ziqi_Data
+  m_EditorClassIdentifier: 
+  vidEssayClip: {fileID: 32900000, guid: 3a13fbee16404ae4cbf248421bbbe62f, type: 3}
+  vidEssayThumbnail: {fileID: 21300000, guid: 26dba4cf4a5d94b46a91c5e2288b0dba, type: 3}
+  vidEssayName: Ziqi Li
+  vidEssayTitle: Social Phenomena in Asian Animation
+  vidEssayDescription: 'Exploration of Societal Phenomenon in Asian Contexts through
+    Animation: Investigating How Animated Works Use Metaphors, Characters, and Plot
+    to Explore and Reflect on Controversial Social Issues Related to Asia'

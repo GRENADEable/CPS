@@ -15,3 +15,17 @@ MonoBehaviour:
   vidEssayClip: {fileID: 32900000, guid: 053a7bbba92878a42881706f279873fe, type: 3}
   vidEssayThumbnail: {fileID: 21300000, guid: c10266baa1c33f64c956a3517adc1521, type: 3}
   vidEssayName: Khatim Javed Dar
+  vidEssayTitle: Redesigning Street Games to fit the Urban Play Context
+  vidEssayDescription: "The game Stacker in collaboration with RMIT Creative and
+    Future Play Lab has taken inspiration from the New Games Movement where this
+    movement emerged when Stewart Brand developed one his first few games. One was
+    \"Slaughter\u201D in protest of the Vietnam War and the other one was \u201CEarth
+    Ball\u201D which is a battle to control Mother Earth.\r\n\r\nThe New Games Movement
+    encourages everyone to participate and that no one should be left out. Stacker
+    follows the same approach by replacing competitive play with cooperative play.
+    The players have to work together to stack boxes as high as they can to reach
+    the final goal height along the wall.\r\n\r\nStacker was initially inspired by
+    a street game called Seven Stones but along with many play-tests and client requirements,
+    some of the core elements were reimagined for campus context. Stacker got an
+    opportunity to be part of the four-day playtest at RMIT Melbourne City Campus
+    at the Melbourne International Games Week (MIGW) 2023."

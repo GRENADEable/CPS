@@ -15,3 +15,11 @@ MonoBehaviour:
   vidEssayClip: {fileID: 32900000, guid: dc7817c6c3ebb0d4494913b1d68cc8c0, type: 3}
   vidEssayThumbnail: {fileID: 21300000, guid: 9e088ac1f7bf88142881839576cd16af, type: 3}
   vidEssayName: Gin Lin
+  vidEssayTitle: ' Sound in Urban Play - Symphony With'
+  vidEssayDescription: "Co-designer: Nicholas Leong\r\n\n\rSymphony With is an interactive
+    sound installation. It is one of the games from Urban Play School,  a Future
+    Play Lab project, collaborated with RMIT Creative. Symphony With involves participants
+    in two distinct phases: \u2019Curiosity\u2019 and \u2018Connectivity.' It organically
+    encourages players to explore patterns, collaborate, and compose a 'symphony'
+    together. It bridges the gap between strangers and friends, fostering social
+    interaction and connection.\n\nPhoto credit: Ashish Narwade / Nicholas Leong"

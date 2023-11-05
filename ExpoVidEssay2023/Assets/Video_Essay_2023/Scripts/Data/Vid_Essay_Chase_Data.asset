@@ -15,3 +15,16 @@ MonoBehaviour:
   vidEssayClip: {fileID: 32900000, guid: 01c3547efd1984946b02e7a5b0a988ce, type: 3}
   vidEssayThumbnail: {fileID: 21300000, guid: ae43ad7d0084bc540839bed9f589e830, type: 3}
   vidEssayName: Chase Profaca
+  vidEssayTitle: How can mechanics be used to support narrative play in fantasy card
+    games?
+  vidEssayDescription: "This video essay examines how game mechanics are used to
+    support narrative play within Level UP! Heroes, a fantasy card game prototype
+    developed by the author Chase Profaca. Narrative play as defined by Salen and
+    Zimmerman (2003) and Dubbelman (2016) is narrative that unfolds in gameplay through
+    player interpretation, meaning it doesn\u2019t explicitly exist until the player
+    interprets it. Narrative play has been utilised within fantasy card games, most
+    notably within card games such as Yu-Gi-Oh! The Trading Card Game (Yu-Gi-Oh)
+    and Magic: The Gathering (MTG). Drawing on these works, the paper shares how
+    the design of Level UP! Heroes has used game mechanics to utilise narrative play.
+    It aims to contribute to an understanding of narrative play within fantasy card
+    games, guiding future work by game designers in this area."
