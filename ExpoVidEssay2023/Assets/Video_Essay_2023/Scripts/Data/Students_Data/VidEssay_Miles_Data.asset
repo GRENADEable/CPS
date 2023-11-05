@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcb1725f876937e4a99b99a8488962c5, type: 3}
-  m_Name: Vid_Essay_Miles_Data
+  m_Name: VidEssay_Miles_Data
   m_EditorClassIdentifier: 
   vidEssayClip: {fileID: 32900000, guid: cedee6019909d3448a185156afd68eed, type: 3}
   vidEssayThumbnail: {fileID: 21300000, guid: 1ad9e225a9d76c047bd3a231699cd4ec, type: 3}

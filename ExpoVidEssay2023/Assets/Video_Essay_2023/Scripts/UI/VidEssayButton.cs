@@ -19,9 +19,9 @@ public class VidEssayButton : MonoBehaviour
     #endregion
 
     #region Event String
-    //public delegate void SendEventString(string text);
-    //public static event SendEventString OnVidButtonClickTitleText;
-    //public static event SendEventString OnVidButtonClickDescriptionText;
+    public delegate void SendEventString(string text);
+    public static event SendEventString OnVidButtonClickTitleText;
+    public static event SendEventString OnVidButtonClickDescriptionText;
     #endregion
 
     #endregion
@@ -89,28 +89,28 @@ public class VidEssayButton : MonoBehaviour
     /// </summary>
     public void OnClick_VidEssayButtonV2()
     {
-        OnHover_MouseExit();
+        //OnHover_MouseExit();
         OnVidButtonClick?.Invoke(_essayIndex);
-        //OnVidButtonClickTitleText?.Invoke(_vidEssayTitleText);
-        //OnVidButtonClickDescriptionText?.Invoke(_vidEssayDescriptionText);
+        OnVidButtonClickTitleText?.Invoke(_vidEssayTitleText);
+        OnVidButtonClickDescriptionText?.Invoke(_vidEssayDescriptionText);
     }
 
-    /// <summary>
-    /// Tied to Event Trigger Pointer Enter on Essay_Button_V2;
-    /// Hides the name Text and reaveals the info Text;
-    /// </summary>
-    public void OnHover_MouseEnter()
-    {
-        _buttonEssayNameText.DOFade(0, 0.2f);
-    }
+    ///// <summary>
+    ///// Tied to Event Trigger Pointer Enter on Essay_Button_V2;
+    ///// Hides the name Text and reaveals the info Text;
+    ///// </summary>
+    //public void OnHover_MouseEnter()
+    //{
+    //    _buttonEssayNameText.DOFade(0, 0.2f);
+    //}
 
-    /// <summary>
-    /// Tied to Event Trigger Pointer Enter on Essay_Button_V2;
-    /// Shows the name Text and hides the info Text;
-    /// </summary>
-    public void OnHover_MouseExit()
-    {
-        _buttonEssayNameText.DOFade(1, 0.2f);
-    }
+    ///// <summary>
+    ///// Tied to Event Trigger Pointer Enter on Essay_Button_V2;
+    ///// Shows the name Text and hides the info Text;
+    ///// </summary>
+    //public void OnHover_MouseExit()
+    //{
+    //    _buttonEssayNameText.DOFade(1, 0.2f);
+    //}
     #endregion
 }

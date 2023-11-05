@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
 
     #region Datas
     [Space, Header("Datas")]
+    //[SerializeField]
+    //[Tooltip("Game Manager Scrtipable Objects")]
+    //private GameManagerData gmData = default;
+
     [SerializeField]
     [Tooltip("Scrtipable Objects for the Video Essays")]
     private VidEssayData[] vidEssayData = default;
@@ -20,7 +24,6 @@ public class GameManager : MonoBehaviour
 
     #region UIs
     [Space, Header("UIs")]
-    [Space, Header("Essay Buttons")]
     [SerializeField]
     [Tooltip("Prefab Button of the Video Essay")]
     private GameObject vidEssayButtonPrefab = default;
@@ -43,11 +46,19 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     [Tooltip("Video Essay Title Text")]
+    private TextMeshProUGUI vidEssayLibraryText = default;
+
+    [SerializeField]
+    [Tooltip("Video Essay Title Text")]
     private TextMeshProUGUI vidEssayTitleText = default;
 
-    //[SerializeField]
-    //[Tooltip("Video Essay Description Text")]
-    //private TextMeshProUGUI vidEssayDescriptionText = default;
+    [SerializeField]
+    [Tooltip("Video Essay Description Text")]
+    private TextMeshProUGUI vidEssayDescriptionText = default;
+
+    [SerializeField]
+    [Tooltip("")]
+    private Scrollbar essayLibraryScrollbar = default;
     #endregion
 
     #region GameObjects
@@ -61,6 +72,11 @@ public class GameManager : MonoBehaviour
     private GameObject vidEssayVideoCanvas = default;
     #endregion
 
+    #region Events
+    public delegate void SendEvents();
+    public static event SendEvents OnEscapeButtonPressed;
+    #endregion
+
     #endregion
 
     #region Private Variables
@@ -72,8 +88,8 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         VidEssayButton.OnVidButtonClick += OnVidButtonClickEventReceived;
-        //VidEssayButton.OnVidButtonClickTitleText += OnVidButtonClickTitleTextEventReceived;
-        //VidEssayButton.OnVidButtonClickDescriptionText += OnVidButtonClickDescriptionTextEventReceived;
+        VidEssayButton.OnVidButtonClickTitleText += OnVidButtonClickTitleTextEventReceived;
+        VidEssayButton.OnVidButtonClickDescriptionText += OnVidButtonClickDescriptionTextEventReceived;
 
         VideoManagerEdited.OnVidClose += OnVidCloseEventReceived;
     }
@@ -81,8 +97,8 @@ public class GameManager : MonoBehaviour
     void OnDisable()
     {
         VidEssayButton.OnVidButtonClick -= OnVidButtonClickEventReceived;
-        //VidEssayButton.OnVidButtonClickTitleText -= OnVidButtonClickTitleTextEventReceived;
-        //VidEssayButton.OnVidButtonClickDescriptionText -= OnVidButtonClickDescriptionTextEventReceived;
+        VidEssayButton.OnVidButtonClickTitleText -= OnVidButtonClickTitleTextEventReceived;
+        VidEssayButton.OnVidButtonClickDescriptionText -= OnVidButtonClickDescriptionTextEventReceived;
 
         VideoManagerEdited.OnVidClose -= OnVidCloseEventReceived;
     }
@@ -90,8 +106,8 @@ public class GameManager : MonoBehaviour
     void OnDestroy()
     {
         VidEssayButton.OnVidButtonClick -= OnVidButtonClickEventReceived;
-        //VidEssayButton.OnVidButtonClickTitleText -= OnVidButtonClickTitleTextEventReceived;
-        //VidEssayButton.OnVidButtonClickDescriptionText -= OnVidButtonClickDescriptionTextEventReceived;
+        VidEssayButton.OnVidButtonClickTitleText -= OnVidButtonClickTitleTextEventReceived;
+        VidEssayButton.OnVidButtonClickDescriptionText -= OnVidButtonClickDescriptionTextEventReceived;
 
         VideoManagerEdited.OnVidClose -= OnVidCloseEventReceived;
     }
@@ -100,14 +116,17 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //fadeBG.DOFade(0, 0.5f);
-        vidEssayTitleText.DOFade(1, 2f);
+        vidEssayLibraryText.DOFade(1, 2f);
         IntialiseButtons();
     }
 
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
+        {
             CloseVidPlayer();
+            OnEscapeButtonPressed?.Invoke();
+        }
     }
     #endregion
 
@@ -168,18 +187,23 @@ public class GameManager : MonoBehaviour
 
         vidEssayLibraryPanel.SetActive(false);
         vidEssayVideoCanvas.SetActive(true);
+
+        //if (gmData.currEssayVersion == GameManagerData.EssaySceneVerion.Version1)
         vidPlayer.Play();
         vidRendTex.Release();
+
+        if (essayLibraryScrollbar != null)
+            essayLibraryScrollbar.value = 1;
     }
 
-    //void OnVidButtonClickTitleTextEventReceived(string vidEssayTitle)
-    //{
+    void OnVidButtonClickTitleTextEventReceived(string vidEssayTitle)
+    {
+        vidEssayTitleText.text = vidEssayTitle;
+    }
 
-    //}
-
-    //void OnVidButtonClickDescriptionTextEventReceived(string vidEssayTitle)
-    //{
-
-    //}
+    void OnVidButtonClickDescriptionTextEventReceived(string vidEssayDescription)
+    {
+        vidEssayDescriptionText.text = vidEssayDescription;
+    }
     #endregion
 }

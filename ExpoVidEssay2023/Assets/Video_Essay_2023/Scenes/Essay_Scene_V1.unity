@@ -320,7 +320,10 @@ MonoBehaviour:
   vidEssyButtonSpawnPos: {fileID: 952376453}
   vidPlayer: {fileID: 7139353867448274678}
   vidRendTex: {fileID: 8400000, guid: a4a20f94801544248afc249133608cee, type: 2}
-  vidEssayTitleText: {fileID: 1321007589}
+  vidEssayLibraryText: {fileID: 1321007589}
+  vidEssayTitleText: {fileID: 0}
+  vidEssayDescriptionText: {fileID: 0}
+  essayLibraryScrollbar: {fileID: 0}
   vidEssayLibraryPanel: {fileID: 510111721}
   vidEssayVideoCanvas: {fileID: 7139353866820563732}
 --- !u!1 &952376452
@@ -782,7 +785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -985,7 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1433,7 +1436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1624,6 +1627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c148ca643fdba468821733c736f548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gmData: {fileID: 11400000, guid: f57b1409d1e9e7a40a71e46a32142bba, type: 2}
   vidPlayer: {fileID: 7139353867448274678}
   vidProgressImg: {fileID: 7139353867920774691}
   buttonImg: {fileID: 7139353866638784618}

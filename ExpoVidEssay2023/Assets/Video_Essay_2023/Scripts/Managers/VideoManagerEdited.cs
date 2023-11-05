@@ -8,6 +8,13 @@ public class VideoManagerEdited : MonoBehaviour, IDragHandler, IPointerDownHandl
 {
     #region Serialized Variables
 
+    #region Datas
+    //[Space, Header("Datas")]
+    //[SerializeField]
+    //[Tooltip("Game Manager Scrtipable Objects")]
+    //private GameManagerData gmData = default;
+    #endregion
+
     #region UIs
     [Space, Header("UIs")]
     [SerializeField]
@@ -48,24 +55,35 @@ public class VideoManagerEdited : MonoBehaviour, IDragHandler, IPointerDownHandl
     void OnEnable()
     {
         vidPlayer.loopPointReached += OnVidPlayerEnded;
+
+        GameManager.OnEscapeButtonPressed += OnEscapeButtonPressedEventReceived;
     }
 
     void OnDisable()
     {
         vidPlayer.loopPointReached -= OnVidPlayerEnded;
+
+        GameManager.OnEscapeButtonPressed -= OnEscapeButtonPressedEventReceived;
     }
 
     void OnDestroy()
     {
         vidPlayer.loopPointReached -= OnVidPlayerEnded;
+
+        GameManager.OnEscapeButtonPressed -= OnEscapeButtonPressedEventReceived;
     }
     #endregion
+
+    //void Start()
+    //{
+    //    if (gmData.currEssayVersion == GameManagerData.EssaySceneVerion.Version2)
+    //        _isVideoPaused = true;
+    //}
 
     void Update()
     {
         if (vidPlayer.frameCount > 0)
             vidProgressImg.fillAmount = (float)vidPlayer.frame / (float)vidPlayer.frameCount;
-
 
         if (Input.GetKeyDown(KeyCode.Space) && vidPlayer.gameObject.activeInHierarchy)
         {
@@ -136,7 +154,23 @@ public class VideoManagerEdited : MonoBehaviour, IDragHandler, IPointerDownHandl
     /// Tied to Back_Button;
     /// Closes the video player;
     /// </summary>
-    public void OnClick_VideoPlayerClose() => OnVidClose?.Invoke();
+    public void OnClick_VideoPlayerClose()
+    {
+        OnVidClose?.Invoke();
+        buttonImg.sprite = buttonImgSprites[1];
+        _isVideoPaused = false;
+        //if (gmData.currEssayVersion == GameManagerData.EssaySceneVerion.Version1)
+        //{
+        //    buttonImg.sprite = buttonImgSprites[1];
+        //    _isVideoPaused = false;
+        //}
+
+        //if (gmData.currEssayVersion == GameManagerData.EssaySceneVerion.Version2)
+        //{
+        //    buttonImg.sprite = buttonImgSprites[0];
+        //    _isVideoPaused = true;
+        //}
+    }
 
     /// <summary>
     /// Tied to Pause_Button;
@@ -169,6 +203,12 @@ public class VideoManagerEdited : MonoBehaviour, IDragHandler, IPointerDownHandl
     {
         buttonImg.sprite = buttonImgSprites[0];
         _isVideoPaused = true;
+    }
+
+    void OnEscapeButtonPressedEventReceived()
+    {
+        buttonImg.sprite = buttonImgSprites[1];
+        _isVideoPaused = false;
     }
     #endregion
 }

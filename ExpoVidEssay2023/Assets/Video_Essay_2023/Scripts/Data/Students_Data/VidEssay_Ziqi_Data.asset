@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcb1725f876937e4a99b99a8488962c5, type: 3}
-  m_Name: Vid_Essay_Ziqi_Data
+  m_Name: VidEssay_Ziqi_Data
   m_EditorClassIdentifier: 
   vidEssayClip: {fileID: 32900000, guid: 3a13fbee16404ae4cbf248421bbbe62f, type: 3}
   vidEssayThumbnail: {fileID: 21300000, guid: 26dba4cf4a5d94b46a91c5e2288b0dba, type: 3}
