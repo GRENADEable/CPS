@@ -28,10 +28,10 @@ public class VidEssayButton : MonoBehaviour
 
     #region Private Variables
     private TextMeshProUGUI _buttonEssayNameText = default;
-    [TextArea(2, 5)][SerializeField] private string _vidEssayTitleText = default;
-    [TextArea(30, 5)][SerializeField] private string _vidEssayDescriptionText = default;
+    [TextArea(2, 5)] private string _vidEssayTitleText = default;
+    [TextArea(30, 5)] private string _vidEssayDescriptionText = default;
     private Image _buttonEssayImg = default;
-    [SerializeField] private int _essayIndex = default;
+    private int _essayIndex = default;
     private VidEssayData _vidEssayData = default;
     #endregion
 
